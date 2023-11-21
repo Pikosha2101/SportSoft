@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SportSoft</string>
+    <string name="Restore_password"><u>Restore password</u></string>
+    <string name="Arbitrator">Arbitrator</string>
+    <string name="MatchEventManagement">Match event management</string>
+    <string name="Authorization">Authorization</string>
+    <string name="Login">Login</string>
+    <string name="Password">Password</string>
+    <string name="Input">Input</string>
+</resources>

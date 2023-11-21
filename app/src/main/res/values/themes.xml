@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SportSoft" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/mainBG</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.SportSoft" parent="Base.Theme.SportSoft" />
+</resources>

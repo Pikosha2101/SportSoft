@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SportSoft</string>
+    <string name="Restore_password"><u>Восстановить пароль</u></string>
+    <string name="Arbitrator">Арбитр</string>
+    <string name="MatchEventManagement">Управление событиями матча</string>
+    <string name="Authorization">Авторизация</string>
+    <string name="Login">Логин</string>
+    <string name="Password">Пароль</string>
+    <string name="Input">Войти</string>
+</resources>
