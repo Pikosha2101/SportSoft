@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsoft.Adapters.MatchRecyclerAdapter
 import com.example.sportsoft.Listener
@@ -152,6 +153,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     }
 
     override fun onClickOpen(param: MatchModel) {
-        Toast.makeText(requireContext(), "open " + param.firstTeamName + "-" + param.secondTeamName, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
     }
 }

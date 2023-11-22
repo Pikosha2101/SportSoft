@@ -22,5 +22,17 @@
         <action
             android:id="@+id/action_matchRegisterFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_matchRegisterFragment_to_prematchProtocolFragment"
+            app:destination="@id/prematchProtocolFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/prematchProtocolFragment"
+        android:name="com.example.sportsoft.Fragments.PrematchProtocolFragment"
+        android:label="PrematchProtocolFragment"
+        tools:layout="@layout/prematch_protocol_fragment">
+        <action
+            android:id="@+id/action_prematchProtocolFragment_to_matchRegisterFragment"
+            app:destination="@id/matchRegisterFragment" />
     </fragment>
 </navigation>
