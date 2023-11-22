@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDatePickerFromCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayFrom.Custom</item>
+        <item name="cardBackgroundColor">@color/transparent</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">#A4AFB6</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlayFrom.Custom" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">5dp</item>
+        <item name="cornerSizeBottomLeft">5dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+    </style>
+
+
+    <style name="CustomDatePickerToCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayTo.Custom</item>
+        <item name="cardBackgroundColor">@color/transparent</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">#A4AFB6</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlayTo.Custom" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">5dp</item>
+        <item name="cornerSizeTopRight">5dp</item>
+    </style>
+
+
+    <style name="CustomScoreCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/transparent</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">#B8CAD5</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+</resources>

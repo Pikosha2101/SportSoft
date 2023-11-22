@@ -1,9 +1,11 @@
 package com.example.sportsoft.Fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,12 +15,13 @@ import com.example.sportsoft.Listener
 import com.example.sportsoft.Models.MatchModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterFragmentBinding
+import java.util.Calendar
 
 class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listener<MatchModel>{
     private var _binding : MatchRegisterFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = MatchRecyclerAdapter(this)
-
+    private val calendar = Calendar.getInstance()
 
 
     override fun onCreateView(
@@ -38,6 +41,14 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
+
+        datePickerCardViewFrom.setOnClickListener {
+            showDatePickerFromDialog()
+        }
+        
+        datePickerCardViewTo.setOnClickListener {
+            showDatePickerToDialog()
+        }
 
         dateSortConstraint.setOnClickListener {
             Toast.makeText(requireContext(), "Сортировка по дате", Toast.LENGTH_SHORT).show()
@@ -154,5 +165,39 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
     override fun onClickOpen(param: MatchModel) {
         findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
+    }
+
+    private fun showDatePickerFromDialog(){
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                val selectedDate = "$dayOfMonth.${month + 1}.$year"
+                binding.dateFromEditText.text = selectedDate
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000 // Запретить выбор прошедших дат
+
+        datePickerDialog.show()
+    }
+
+    private fun showDatePickerToDialog(){
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+                val selectedDate = "$dayOfMonth.${month + 1}.$year"
+                binding.dateToEditText.text = selectedDate
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000 // Запретить выбор прошедших дат
+
+        datePickerDialog.show()
     }
 }
