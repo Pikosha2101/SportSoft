@@ -34,7 +34,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
 
-        startButton.setOnClickListener {
+        startCardView.setOnClickListener {
             if (!isTimerRunning && !isTimerPaused) {
                 startTimer()
             } else if (isTimerPaused) {
@@ -42,11 +42,11 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
         }
 
-        stopButton.setOnClickListener {
+        stopCardView.setOnClickListener {
             stopTimer()
         }
 
-        pauseButton.setOnClickListener {
+        pauseCardView.setOnClickListener {
             pauseTimer()
         }
     }
