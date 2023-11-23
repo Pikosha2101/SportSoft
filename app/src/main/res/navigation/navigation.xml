@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_matchRegisterFragment_to_prematchProtocolFragment"
             app:destination="@id/prematchProtocolFragment" />
+        <action
+            android:id="@+id/action_matchRegisterFragment_to_matchProgressFragment"
+            app:destination="@id/matchProgressFragment" />
     </fragment>
     <fragment
         android:id="@+id/prematchProtocolFragment"
@@ -33,6 +36,14 @@
         tools:layout="@layout/prematch_protocol_fragment">
         <action
             android:id="@+id/action_prematchProtocolFragment_to_matchRegisterFragment"
+            app:destination="@id/matchRegisterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchProgressFragment"
+        android:name="com.example.sportsoft.Fragments.MatchProgressFragment"
+        android:label="MatchProgressFragment" >
+        <action
+            android:id="@+id/action_matchProgressFragment_to_matchRegisterFragment"
             app:destination="@id/matchRegisterFragment" />
     </fragment>
 </navigation>

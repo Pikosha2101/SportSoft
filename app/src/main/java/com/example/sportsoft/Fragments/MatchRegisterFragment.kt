@@ -160,7 +160,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     }
 
     override fun onClickEdit(param: MatchModel) {
-        Toast.makeText(requireContext(), "edit " + param.firstTeamName + "-" + param.secondTeamName, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
     }
 
     override fun onClickOpen(param: MatchModel) {
