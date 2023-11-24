@@ -159,11 +159,11 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     }
 
     override fun onClickEdit(param: MatchModel) {
-        findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
     }
 
-    override fun onClickOpen(param: MatchModel) {
-        findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
+    override fun onClickStart(param: MatchModel) {
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
     }
 
     private fun showDatePickerFromDialog() {

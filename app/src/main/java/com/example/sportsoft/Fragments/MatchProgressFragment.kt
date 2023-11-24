@@ -3,6 +3,7 @@ package com.example.sportsoft.Fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -140,6 +141,22 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
                 secondTeamFoulsCountSecondTimeTextView.text = (score + 1).toString()
             } else {
                 secondTeamFoulsCountSecondTimeTextView.text = (1).toString()
+            }
+        }
+
+        eventTimePlusImageButton.setOnClickListener {
+            if (eventTimeEditText.text.isNotEmpty()){
+                val value = eventTimeEditText.text.toString().toInt()
+                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((value + 1).toString())
+            } else {
+                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((1).toString())
+            }
+        }
+
+        eventTimeMinusImageButton.setOnClickListener {
+            val value = eventTimeEditText.text.toString().toInt()
+            if (eventTimeEditText.text.isNotEmpty() && value > 0){
+                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((value - 1 ).toString())
             }
         }
     }

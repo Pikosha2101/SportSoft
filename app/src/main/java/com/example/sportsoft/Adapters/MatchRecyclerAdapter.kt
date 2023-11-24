@@ -25,7 +25,7 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
             firstTeamScoreTextView.text = matchModel.firstTeamScore.toString()
             secondTeamScoreTextView.text = matchModel.secondTeamScore.toString()
             openImageButton.setOnClickListener {
-                listener.onClickOpen(matchModel)
+                listener.onClickStart(matchModel)
             }
             editImageButton.setOnClickListener {
                 listener.onClickEdit(matchModel)
@@ -40,7 +40,7 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
         return Holder(inflater.inflate(R.layout.match_register_recycler_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: MatchRecyclerAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(
             matchModels[position], listener
         )

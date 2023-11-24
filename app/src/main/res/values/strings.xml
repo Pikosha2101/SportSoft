@@ -7,4 +7,13 @@
     <string name="Login">Login</string>
     <string name="Password">Password</string>
     <string name="Input">Input</string>
+    <string name="MatchProgress">Match progress (Live)</string>
+    <string name="HomeTeam">Home team</string>
+    <string name="AwayTeam">Away team</string>
+    <string name="Score">Score</string>
+    <string name="Penalty">Penalty</string>
+    <string name="TechnicalDefeat">Technical defeat</string>
+    <string name="Start">Start</string>
+    <string name="Pause">Pause</string>
+    <string name="Stop">Stop</string>
 </resources>

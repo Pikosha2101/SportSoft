@@ -8,4 +8,13 @@
     <string name="Login">Логин</string>
     <string name="Password">Пароль</string>
     <string name="Input">Войти</string>
+    <string name="MatchProgress">Ход матча (Live)</string>
+    <string name="HomeTeam">Команда хозяев</string>
+    <string name="AwayTeam">Команда гостей</string>
+    <string name="Score">Счёт</string>
+    <string name="Penalty">Пенальти</string>
+    <string name="TechnicalDefeat">Техническое поражение</string>
+    <string name="Start">Старт</string>
+    <string name="Pause">Пауза</string>
+    <string name="Stop">Стоп</string>
 </resources>

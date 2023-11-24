@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="Ход матча (Live)"
+                android:text="@string/MatchProgress"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Команда хозяев"
+                    android:text="@string/HomeTeam"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Команда гостей"
+                    android:text="@string/AwayTeam"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -93,7 +93,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Счет"
+                        android:text="@string/Score"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -244,7 +244,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:buttonTint="#B8CAD5"
-                        android:text="Пенальти"
+                        android:text="@string/Penalty"
                         android:textSize="16sp" />
 
                     <CheckBox
@@ -252,7 +252,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:buttonTint="#B8CAD5"
-                        android:text="Техническое поражение"
+                        android:text="@string/TechnicalDefeat"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -320,7 +320,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
-                                android:text="Старт"
+                                android:text="@string/Start"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -358,7 +358,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
-                                android:text="Пауза"
+                                android:text="@string/Pause"
                                 android:textColor="#0078D2"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -395,7 +395,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
-                                android:text="Стоп"
+                                android:text="@string/Stop"
                                 android:textColor="#0078D2"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -858,11 +858,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <EditText
+                                android:id="@+id/eventTimeEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/transparent"
                                 android:layout_marginEnd="16dp"
-                                android:text="0"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:imeOptions="actionDone"
                                 android:textSize="18sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -878,6 +883,7 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageButton
+                                    android:id="@+id/eventTimePlusImageButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -885,6 +891,7 @@
                                     android:src="@drawable/arrow_up_icon" />
 
                                 <ImageButton
+                                    android:id="@+id/eventTimeMinusImageButton"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
