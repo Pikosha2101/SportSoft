@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -69,6 +70,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
                     android:background="@color/border"
                     android:clickable="false"
                     android:focusable="false"
@@ -127,6 +129,7 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
+                                        android:id="@+id/firstTeamScoreTextView"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="16dp"
@@ -146,6 +149,7 @@
                                         app:layout_constraintTop_toTopOf="parent">
 
                                         <ImageButton
+                                            android:id="@+id/firstTeamScoreCountPlusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -153,6 +157,7 @@
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
+                                            android:id="@+id/firstTeamScoreCountMinusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -184,6 +189,7 @@
                                     android:layout_height="match_parent">
 
                                     <TextView
+                                        android:id="@+id/secondTeamScoreTextView"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="16dp"
@@ -203,6 +209,7 @@
                                         app:layout_constraintTop_toTopOf="parent">
 
                                         <ImageButton
+                                            android:id="@+id/secondTeamScoreCountPlusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -210,6 +217,7 @@
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
+                                            android:id="@+id/secondTeamScoreCountMinusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -252,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="32dp"
-                    android:background="@color/border"
+                    android:background="@color/separator"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -282,13 +290,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/startCardView"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
                         android:backgroundTint="#0078D2"
                         app:cardCornerRadius="20dp">
 
@@ -323,8 +333,9 @@
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/pauseCardView"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/white"
                         app:cardCornerRadius="20dp"
                         app:strokeColor="#0078D2">
@@ -360,7 +371,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/stopCardView"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:backgroundTint="@color/white"
                         app:cardCornerRadius="20dp"
@@ -403,7 +414,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/border"
+                android:background="@color/separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
@@ -421,17 +432,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/separator" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv3"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                app:strokeColor="@color/transparent"
+                android:backgroundTint="@color/border"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout10"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/textView13"
@@ -444,16 +461,649 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/textView14"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="ФК Локо"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/firstTeamFoulsCountMinusFirstTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="16dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/minus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/materialCardView"
+                                android:layout_width="66dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintStart_toEndOf="@+id/firstTeamFoulsCountMinusFirstTimeImageButton"
+                                app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+                                <TextView
+                                    android:id="@+id/firstTeamFoulsCountFirstTimeTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <ImageButton
+                                android:id="@+id/firstTeamFoulsCountPlusFirstTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="8dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/plus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+                                app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/textView16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="ФК Крылья советов"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/secondTeamFoulsCountMinusFirstTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="16dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/minus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView2" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/materialCardView2"
+                                android:layout_width="66dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintStart_toEndOf="@+id/secondTeamFoulsCountMinusFirstTimeImageButton"
+                                app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+                                <TextView
+                                    android:id="@+id/secondTeamFoulsCountFirstTimeTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <ImageButton
+                                android:id="@+id/secondTeamFoulsCountPlusFirstTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="8dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/plus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
+                                app:layout_constraintStart_toEndOf="@+id/materialCardView2"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView2" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:strokeColor="@color/transparent"
+                android:backgroundTint="@color/border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv3">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cv3">
+
                     <TextView
+                        android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="ФК Локо"
+                        android:text="2 тайм"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView17">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/textView18"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="ФК Локо"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/firstTeamFoulsCountMinusSecondTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="16dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/minus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView3"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView3" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/materialCardView3"
+                                android:layout_width="66dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintStart_toEndOf="@+id/firstTeamFoulsCountMinusSecondTimeImageButton"
+                                app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+                                <TextView
+                                    android:id="@+id/firstTeamFoulsCountSecondTimeTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <ImageButton
+                                android:id="@+id/firstTeamFoulsCountPlusSecondTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="8dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/plus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView3"
+                                app:layout_constraintStart_toEndOf="@+id/materialCardView3"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView3" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/textView19"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="ФК Крылья советов"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/secondTeamFoulsCountMinusSecondTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="16dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/minus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView4"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView4" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/materialCardView4"
+                                android:layout_width="66dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintStart_toEndOf="@+id/secondTeamFoulsCountMinusSecondTimeImageButton"
+                                app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+                                <TextView
+                                    android:id="@+id/secondTeamFoulsCountSecondTimeTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textSize="18sp"/>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <ImageButton
+                                android:id="@+id/secondTeamFoulsCountPlusSecondTimeImageButton"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginStart="8dp"
+                                android:backgroundTint="@color/transparent"
+                                android:src="@drawable/plus_button_icon"
+                                app:layout_constraintBottom_toBottomOf="@+id/materialCardView4"
+                                app:layout_constraintStart_toEndOf="@+id/materialCardView4"
+                                app:layout_constraintTop_toTopOf="@+id/materialCardView4" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv4" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator1">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="События матча"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Событие"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Игрок"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Ассистент"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Минута"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+                    <com.google.android.material.card.MaterialCardView
+                        style="@style/CustomScoreCardViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1.2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:text="0"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@color/transparent"
+                                    android:src="@drawable/arrow_up_icon" />
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@color/transparent"
+                                    android:src="@drawable/arrow_down_icon" />
+                            </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1">
+
+                        <Switch
+                            android:id="@+id/switch1"
+                            android:layout_width="50dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingStart="8dp"
+                            android:text="Использовать время таймера"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/switch1"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/resetCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv"
+                app:strokeColor="#0078D2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Сбросить"
+                        android:textColor="#0078D2"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="#0078D2"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv"
+                app:strokeColor="#0078D2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Добавить"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:id="@+id/separator4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/separator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addCardView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator4">
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Список событий"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/separator"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/leaveCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv2"
+                app:strokeColor="#0078D2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Выйти из Live"
+                        android:textColor="#0078D2"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/finishCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="#0078D2"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv2"
+                app:strokeColor="#0078D2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Завершить матч"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

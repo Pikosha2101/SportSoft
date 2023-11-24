@@ -5,4 +5,5 @@
     <color name="transparent">#00000000</color>
     <color name="mainBG">#F9F9F9</color>
     <color name="border">#EDF2F5</color>
+    <color name="separator">#B8CAD5</color>
 </resources>

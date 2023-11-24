@@ -22,6 +22,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     private lateinit var countUpTimer: CountUpTimer
     private lateinit var handler: Handler
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +32,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         handler = Handler(Looper.getMainLooper())
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +53,98 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         pauseCardView.setOnClickListener {
             pauseTimer()
         }
+
+        firstTeamScoreCountPlusImageView.setOnClickListener {
+            val score = firstTeamScoreTextView.text.toString().toInt()
+            firstTeamScoreTextView.text = (score + 1).toString()
+        }
+
+        firstTeamScoreCountMinusImageView.setOnClickListener {
+            val score = firstTeamScoreTextView.text.toString().toInt()
+            if (score != 0){
+                firstTeamScoreTextView.text = (score - 1).toString()
+            }
+        }
+
+        secondTeamScoreCountPlusImageView.setOnClickListener {
+            val score = secondTeamScoreTextView.text.toString().toInt()
+            secondTeamScoreTextView.text = (score + 1).toString()
+        }
+
+
+        secondTeamScoreCountMinusImageView.setOnClickListener {
+            val score = secondTeamScoreTextView.text.toString().toInt()
+            if (score != 0){
+                secondTeamScoreTextView.text = (score - 1).toString()
+            }
+        }
+
+        firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
+            if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && firstTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
+                val score = firstTeamFoulsCountFirstTimeTextView.text.toString().toInt()
+                firstTeamFoulsCountFirstTimeTextView.text = (score - 1).toString()
+            }
+        }
+
+        firstTeamFoulsCountPlusFirstTimeImageButton.setOnClickListener {
+            if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty()){
+                val score = firstTeamFoulsCountFirstTimeTextView.text.toString().toInt()
+                firstTeamFoulsCountFirstTimeTextView.text = (score + 1).toString()
+            } else {
+                firstTeamFoulsCountFirstTimeTextView.text = (1).toString()
+            }
+        }
+
+        secondTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
+            if (secondTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && secondTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
+                val score = secondTeamFoulsCountFirstTimeTextView.text.toString().toInt()
+                secondTeamFoulsCountFirstTimeTextView.text = (score - 1).toString()
+            }
+        }
+
+        secondTeamFoulsCountPlusFirstTimeImageButton.setOnClickListener {
+            if (secondTeamFoulsCountFirstTimeTextView.text.isNotEmpty()){
+                val score = secondTeamFoulsCountFirstTimeTextView.text.toString().toInt()
+                secondTeamFoulsCountFirstTimeTextView.text = (score + 1).toString()
+            } else {
+                secondTeamFoulsCountFirstTimeTextView.text = (1).toString()
+            }
+        }
+
+        firstTeamFoulsCountMinusSecondTimeImageButton.setOnClickListener {
+            if (firstTeamFoulsCountSecondTimeTextView.text.isNotEmpty() && firstTeamFoulsCountSecondTimeTextView.text.toString().toInt() > 0){
+                val score = firstTeamFoulsCountSecondTimeTextView.text.toString().toInt()
+                firstTeamFoulsCountSecondTimeTextView.text = (score - 1).toString()
+            }
+        }
+
+        firstTeamFoulsCountPlusSecondTimeImageButton.setOnClickListener {
+            if (firstTeamFoulsCountSecondTimeTextView.text.isNotEmpty()){
+                val score = firstTeamFoulsCountSecondTimeTextView.text.toString().toInt()
+                firstTeamFoulsCountSecondTimeTextView.text = (score + 1).toString()
+            } else {
+                firstTeamFoulsCountSecondTimeTextView.text = (1).toString()
+            }
+        }
+
+        secondTeamFoulsCountMinusSecondTimeImageButton.setOnClickListener {
+            if (secondTeamFoulsCountSecondTimeTextView.text.isNotEmpty() && secondTeamFoulsCountSecondTimeTextView.text.toString().toInt() > 0){
+                val score = secondTeamFoulsCountSecondTimeTextView.text.toString().toInt()
+                secondTeamFoulsCountSecondTimeTextView.text = (score - 1).toString()
+            }
+        }
+
+        secondTeamFoulsCountPlusSecondTimeImageButton.setOnClickListener {
+            if (secondTeamFoulsCountSecondTimeTextView.text.isNotEmpty()){
+                val score = secondTeamFoulsCountSecondTimeTextView.text.toString().toInt()
+                secondTeamFoulsCountSecondTimeTextView.text = (score + 1).toString()
+            } else {
+                secondTeamFoulsCountSecondTimeTextView.text = (1).toString()
+            }
+        }
     }
+
+
 
     private fun startTimer() {
         if (!isTimerRunning) {
@@ -65,6 +160,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         isTimerPaused = false
     }
 
+
+
     private fun resumeTimer() {
         if (isTimerPaused) {
             countUpTimer.startTimer()
@@ -72,6 +169,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             isTimerPaused = false
         }
     }
+
+
 
     private fun stopTimer() {
         if (isTimerRunning || isTimerPaused) {
@@ -83,6 +182,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         }
     }
 
+
+
     private fun pauseTimer() {
         if (isTimerRunning) {
             countUpTimer.cancel()
@@ -92,12 +193,16 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         }
     }
 
+
+
     private fun updateTimerText() {
         val minutes = secondsRemaining / 60
         val seconds = secondsRemaining % 60
         val timeString = String.format("%02d:%02d", minutes, seconds)
         binding.timerTextView.text = timeString
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
