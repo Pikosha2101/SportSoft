@@ -54,7 +54,8 @@
                     android:paddingStart="10dp"
                     android:text="ФК Локомотив"
                     android:textSize="16sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"
+                    tools:ignore="RtlSymmetry" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -78,7 +79,8 @@
                     android:paddingStart="10dp"
                     android:text="ФК Крылья советов"
                     android:textSize="16sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView7"
+                    tools:ignore="RtlSymmetry" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout4"
@@ -426,7 +428,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Фолы команд"
+                android:text="@string/TeamFouls"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/separator" />
@@ -456,7 +458,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="1 тайм"
+                        android:text="@string/FirstHalf"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -612,7 +614,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="2 тайм"
+                        android:text="@string/SecondHalf"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -769,7 +771,7 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="События матча"
+                    android:text="@string/MatchEvents"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -779,7 +781,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Событие"
+                    android:text="@string/Event"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -797,7 +799,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Игрок"
+                    android:text="@string/Player"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -814,7 +816,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Ассистент"
+                    android:text="@string/Assistant"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
@@ -829,7 +831,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Минута"
+                    android:text="@string/Minute"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spinner3" />
 
@@ -921,11 +923,12 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:paddingStart="8dp"
-                            android:text="Использовать время таймера"
+                            android:text="@string/UseTimerTime"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/switch1"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="RtlSymmetry" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -952,7 +955,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="Сбросить"
+                        android:text="@string/Reset"
                         android:textColor="#0078D2"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -985,7 +988,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="Добавить"
+                        android:text="@string/Add"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -1022,7 +1025,7 @@
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Список событий"
+                    android:text="@string/ListOfEvents"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -1071,7 +1074,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="Выйти из Live"
+                        android:text="@string/ExitLive"
                         android:textColor="#0078D2"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -1104,7 +1107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="Завершить матч"
+                        android:text="@string/FinishTheMatch"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"

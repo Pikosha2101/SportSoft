@@ -17,4 +17,18 @@
     <string name="Start">Старт</string>
     <string name="Pause">Пауза</string>
     <string name="Stop">Стоп</string>
+    <string name="TeamFouls">фолы команд</string>
+    <string name="FirstHalf">1 тайм</string>
+    <string name="SecondHalf">2 тайм</string>
+    <string name="MatchEvents">События матча</string>
+    <string name="Event">Событие</string>
+    <string name="Player">Игрок</string>
+    <string name="Assistant">Ассистент</string>
+    <string name="Minute">Минута</string>
+    <string name="UseTimerTime">Использовать время таймера</string>
+    <string name="Reset">Сбросить</string>
+    <string name="Add">Добавить</string>
+    <string name="ListOfEvents">Список событий</string>
+    <string name="ExitLive">Выйти из Live</string>
+    <string name="FinishTheMatch">Завершить матч</string>
 </resources>

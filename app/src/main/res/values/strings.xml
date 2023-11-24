@@ -16,4 +16,18 @@
     <string name="Start">Start</string>
     <string name="Pause">Pause</string>
     <string name="Stop">Stop</string>
+    <string name="TeamFouls">Team fouls</string>
+    <string name="FirstHalf">1 half</string>
+    <string name="SecondHalf">2 half</string>
+    <string name="MatchEvents">Match events</string>
+    <string name="Event">Event</string>
+    <string name="Player">Player</string>
+    <string name="Assistant">Assistant</string>
+    <string name="Minute">Minute</string>
+    <string name="UseTimerTime">Use timer time</string>
+    <string name="Reset">Reset</string>
+    <string name="Add">Add</string>
+    <string name="ListOfEvents">List of events</string>
+    <string name="ExitLive">Exit Live</string>
+    <string name="FinishTheMatch">Finish the match</string>
 </resources>
