@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,6 +23,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -46,10 +48,10 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/border"
-                    android:gravity="center_vertical"
-                    android:paddingStart="10dp"
                     android:clickable="false"
                     android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
                     android:text="ФК Локомотив"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -69,11 +71,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/border"
+                    android:clickable="false"
+                    android:focusable="false"
                     android:gravity="center_vertical"
                     android:paddingStart="10dp"
                     android:text="ФК Крылья советов"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -104,6 +106,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView11">
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
@@ -119,6 +122,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
+
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
@@ -141,19 +145,21 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintTop_toTopOf="parent">
+
                                         <ImageButton
                                             android:id="@+id/firstTeamScoreCountPlusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:background="@color/transparent"
                                             android:layout_weight="1"
-                                            android:src="@drawable/arrow_up_icon"/>
+                                            android:background="@color/transparent"
+                                            android:src="@drawable/arrow_up_icon" />
+
                                         <ImageButton
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:background="@color/transparent"
                                             android:layout_weight="1"
-                                            android:src="@drawable/arrow_down_icon"/>
+                                            android:background="@color/transparent"
+                                            android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -174,9 +180,11 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
+
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -195,18 +203,20 @@
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintTop_toTopOf="parent">
+
                                         <ImageButton
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:background="@color/transparent"
                                             android:layout_weight="1"
-                                            android:src="@drawable/arrow_up_icon"/>
+                                            android:background="@color/transparent"
+                                            android:src="@drawable/arrow_up_icon" />
+
                                         <ImageButton
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
-                                            android:background="@color/transparent"
                                             android:layout_weight="1"
-                                            android:src="@drawable/arrow_down_icon"/>
+                                            android:background="@color/transparent"
+                                            android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -227,16 +237,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Пенальти"
                         android:buttonTint="#B8CAD5"
+                        android:text="Пенальти"
                         android:textSize="16sp" />
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Техническое поражение"
                         android:buttonTint="#B8CAD5"
+                        android:text="Техническое поражение"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -298,6 +308,69 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/baseCardview"
+                    style="@style/Base.CardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/baseCardview"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/refereesMatchConstraintLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/heading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Судьи на матч"
+                                android:textSize="18sp"
+                                app:layout_constraintStart_toStartOf="@+id/refereesMatchConstraintLayout"
+                                app:layout_constraintTop_toTopOf="@+id/refereesMatchConstraintLayout"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/hiddenRefereesConstraintLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/refereesMatchConstraintLayout">
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:backgroundTint="@color/black">
+
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

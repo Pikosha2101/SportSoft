@@ -19,9 +19,9 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
         private val binding = MatchRegisterRecyclerItemBinding.bind(item)
 
         fun bind(matchModel: MatchModel, listener: Listener<MatchModel>) = with(binding) {
-            dateTextView.text = matchModel.date.toString()
-            firstTeamNameTextView.text = matchModel.firstTeamName.toString()
-            secondTeamNameTextView.text = matchModel.secondTeamName.toString()
+            dateTextView.text = matchModel.date
+            firstTeamNameTextView.text = matchModel.firstTeamName
+            secondTeamNameTextView.text = matchModel.secondTeamName
             firstTeamScoreTextView.text = matchModel.firstTeamScore.toString()
             secondTeamScoreTextView.text = matchModel.secondTeamScore.toString()
             openImageButton.setOnClickListener {
@@ -40,15 +40,20 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
         return Holder(inflater.inflate(R.layout.match_register_recycler_item, parent, false))
     }
 
+
+
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(
             matchModels[position], listener
         )
     }
 
+
+
     override fun getItemCount(): Int {
         return matchModels.size
     }
+
 
 
     fun setList(list:List<MatchModel>)
