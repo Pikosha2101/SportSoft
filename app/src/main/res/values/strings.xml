@@ -30,4 +30,18 @@
     <string name="ListOfEvents">List of events</string>
     <string name="ExitLive">Exit Live</string>
     <string name="FinishTheMatch">Finish the match</string>
+    <string name="MatchRegister">Match register</string>
+    <string name="FilterDate">Filter by date</string>
+    <string name="DateFormat">DD.MM.YYYY</string>
+    <string name="Date">Date</string>
+    <string name="Teams">Teams</string>
+    <string name="PrematchProtocol">Pre-match protocol</string>
+    <string name="MatchReferees">Referees for the match</string>
+    <string name="FullName">Full name</string>
+    <string name="Position">Position</string>
+    <string name="Delete">Delete</string>
+    <string name="AddReferee">Add a referee</string>
+    <string name="Number">Number</string>
+    <string name="Save">Save</string>
+    <string name="SaveAndStartMatch">Save and start match</string>
 </resources>

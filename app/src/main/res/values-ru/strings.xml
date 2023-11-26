@@ -17,7 +17,7 @@
     <string name="Start">Старт</string>
     <string name="Pause">Пауза</string>
     <string name="Stop">Стоп</string>
-    <string name="TeamFouls">фолы команд</string>
+    <string name="TeamFouls">Фолы команд</string>
     <string name="FirstHalf">1 тайм</string>
     <string name="SecondHalf">2 тайм</string>
     <string name="MatchEvents">События матча</string>
@@ -31,4 +31,18 @@
     <string name="ListOfEvents">Список событий</string>
     <string name="ExitLive">Выйти из Live</string>
     <string name="FinishTheMatch">Завершить матч</string>
+    <string name="MatchRegister">Реестр матчей</string>
+    <string name="FilterDate">Фильтр по дате</string>
+    <string name="DateFormat">ДД.ММ.ГГГГ</string>
+    <string name="Date">Дата</string>
+    <string name="Teams">Команды</string>
+    <string name="PrematchProtocol">Предматчевый протокол</string>
+    <string name="MatchReferees">Судьи на матч</string>
+    <string name="FullName">ФИО</string>
+    <string name="Position">Позиция</string>
+    <string name="Delete">Удалить</string>
+    <string name="AddReferee">Добавить судью</string>
+    <string name="Number">Номер</string>
+    <string name="Save">Сохранить</string>
+    <string name="SaveAndStartMatch">Сохранить и начать матч</string>
 </resources>
