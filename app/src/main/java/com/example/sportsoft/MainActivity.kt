@@ -2,13 +2,6 @@ package com.example.sportsoft
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.PopupMenu
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.sportsoft.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
+        /*val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController: NavController = navHostFragment.navController
 
@@ -29,9 +22,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.authorizationFragment -> hideBottomNav()
                 else -> showBottomNav()
             }
-        }
+        }*/
 
-        binding.menuImageButton.setOnClickListener {
+        /*binding.menuImageButton.setOnClickListener {
             val popupMenu = PopupMenu(this, it)
 
             popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
@@ -50,12 +43,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             popupMenu.show()
-        }
+        }*/
     }
 
 
 
-    private fun showBottomNav() {
+    /*private fun showBottomNav() {
         binding.headerConstraint.visibility = View.VISIBLE
     }
 
@@ -63,5 +56,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideBottomNav() {
         binding.headerConstraint.visibility = View.GONE
-    }
+    }*/
 }

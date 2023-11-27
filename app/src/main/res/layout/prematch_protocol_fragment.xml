@@ -3,13 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBG">
+    android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/mainBG"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/user_profile_icon"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/menuImageButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/menuImageButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/menu_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#B8B8B8"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/textView4"
@@ -20,7 +68,7 @@
                 android:text="@string/PrematchProtocol"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/headerConstraint" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout13"
@@ -129,18 +177,23 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="16dp"
+                                    <EditText
+                                        android:id="@+id/firstTeamScoreTextView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        android:layout_marginBottom="-4dp"
+                                        android:backgroundTint="@color/transparent"
                                         android:text="0"
+                                        android:inputType="number"
+                                        android:textAlignment="center"
                                         android:textSize="18sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent" />
 
                                     <LinearLayout
+                                        android:id="@+id/linearLayout4"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:orientation="vertical"
@@ -157,6 +210,7 @@
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
+                                            android:id="@+id/firstTeamScoreCountMinusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -187,18 +241,23 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="16dp"
+                                    <EditText
+                                        android:id="@+id/secondTeamScoreTextView"
+                                        android:layout_width="0dp"
+                                        android:layout_height="0dp"
+                                        android:layout_marginBottom="-4dp"
+                                        android:backgroundTint="@color/transparent"
                                         android:text="0"
+                                        android:textAlignment="center"
                                         android:textSize="18sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:inputType="number" />
 
                                     <LinearLayout
+                                        android:id="@+id/linearLayout5"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:orientation="vertical"
@@ -207,6 +266,7 @@
                                         app:layout_constraintTop_toTopOf="parent">
 
                                         <ImageButton
+                                            android:id="@+id/secondTeamScoreCountPlusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -214,6 +274,7 @@
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
+                                            android:id="@+id/secondTeamScoreCountMinusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
@@ -226,31 +287,37 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                     <CheckBox
+                        android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:buttonTint="#B8CAD5"
-                            android:text="@string/Penalty"
-                        android:textSize="16sp" />
+                        android:text="@string/Penalty"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <CheckBox
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
                         android:buttonTint="#B8CAD5"
                         android:text="@string/TechnicalDefeat"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout3"
@@ -270,8 +337,10 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
+                        android:id="@+id/firstTeamPlayerSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:background="@drawable/custom_spinner_style"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -295,9 +364,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
+                        android:id="@+id/secondTeamPlayerSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:autofillHints="Выберите игрока комманды"
+                        android:background="@drawable/custom_spinner_style"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView10" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -319,18 +390,20 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/mainBG"
+                android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/baseCardview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:backgroundTint="@color/mainBG"
+                    android:backgroundTint="@color/transparent"
+                    app:strokeColor="@color/transparent"
+                    app:cardCornerRadius="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -343,7 +416,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/refereesMatchConstraintLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -361,7 +434,7 @@
                                 android:id="@+id/arrowDownImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="16dp"
+                                android:layout_marginEnd="8dp"
                                 android:src="@drawable/arrow_down_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -371,16 +444,18 @@
                                 android:id="@+id/separator3"
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
+                                android:layout_marginTop="16dp"
                                 android:background="@color/separator"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/heading" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/hiddenRefereesConstraintLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
                             android:visibility="gone"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/refereesMatchConstraintLayout">
@@ -389,10 +464,10 @@
                                 android:id="@+id/refereeCardView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                app:strokeColor="@color/transparent"
                                 android:backgroundTint="@color/border"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:strokeColor="@color/transparent">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
@@ -414,6 +489,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
                                         android:layout_marginStart="16dp"
+                                        android:layout_marginEnd="16dp"
+                                        android:background="@drawable/custom_spinner_style"
+                                        app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="@+id/refereeNameTextView" />
 
@@ -433,6 +511,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
                                         android:layout_marginStart="16dp"
+                                        android:layout_marginEnd="16dp"
+                                        android:background="@drawable/custom_spinner_style"
+                                        app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toBottomOf="@+id/refereePositionTextView" />
 
@@ -452,26 +533,36 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent">
 
-                                            <ImageView
-                                                android:id="@+id/deleteImageView"
+                                            <androidx.constraintlayout.widget.ConstraintLayout
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginStart="8dp"
-                                                android:src="@drawable/busket_icon"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintStart_toStartOf="parent"
-                                                app:layout_constraintTop_toTopOf="parent" />
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:text="@string/Delete"
-                                                android:textColor="#315F7B"
-                                                android:textSize="16sp"
                                                 app:layout_constraintBottom_toBottomOf="parent"
                                                 app:layout_constraintEnd_toEndOf="parent"
-                                                app:layout_constraintStart_toEndOf="@+id/deleteImageView"
-                                                app:layout_constraintTop_toTopOf="parent" />
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent">
+
+                                                <ImageView
+                                                    android:id="@+id/deleteImageView"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="8dp"
+                                                    android:src="@drawable/busket_icon"
+                                                    app:layout_constraintBottom_toBottomOf="parent"
+                                                    app:layout_constraintStart_toStartOf="parent"
+                                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="8dp"
+                                                    android:text="@string/Delete"
+                                                    android:textColor="#315F7B"
+                                                    android:textSize="16sp"
+                                                    app:layout_constraintBottom_toBottomOf="parent"
+                                                    app:layout_constraintEnd_toEndOf="parent"
+                                                    app:layout_constraintStart_toEndOf="@+id/deleteImageView"
+                                                    app:layout_constraintTop_toTopOf="parent" />
+                                            </androidx.constraintlayout.widget.ConstraintLayout>
                                         </androidx.constraintlayout.widget.ConstraintLayout>
                                     </androidx.cardview.widget.CardView>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -485,24 +576,34 @@
                                 android:layout_marginEnd="16dp"
                                 android:backgroundTint="@color/transparent"
                                 app:cardCornerRadius="20dp"
-                                app:strokeColor="#0078D2"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/refereeCardView">
+                                app:layout_constraintTop_toBottomOf="@+id/refereeCardView"
+                                app:strokeColor="#0078D2">
+
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
 
-                                    <TextView
+                                    <androidx.constraintlayout.widget.ConstraintLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_marginEnd="16dp"
-                                        android:text="@string/AddReferee"
-                                        android:textColor="#0078D2"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="16dp"
+                                            android:layout_marginEnd="16dp"
+                                            android:text="@string/AddReferee"
+                                            android:textColor="#0078D2"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </com.google.android.material.card.MaterialCardView>
 
@@ -518,7 +619,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/addRefereeButton" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -540,7 +641,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:cardCornerRadius="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:backgroundTint="@color/mainBG"
+                    android:backgroundTint="@color/transparent"
                     app:strokeColor="@color/transparent"
                     app:layout_constraintTop_toTopOf="parent">
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -550,7 +651,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/compositionFirstTeamConstraintLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -568,7 +669,7 @@
                                 android:id="@+id/arrowDownCompositionImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="16dp"
+                                android:layout_marginEnd="8dp"
                                 android:src="@drawable/arrow_down_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -578,16 +679,18 @@
                                 android:id="@+id/separator5"
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
+                                android:layout_marginTop="16dp"
                                 android:background="@color/separator"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/FirstTeamCompositionTextView" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/hiddenCompositionFirstTeamConstraintLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
                             android:visibility="gone"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/compositionFirstTeamConstraintLayout">
@@ -611,6 +714,7 @@
                                     android:id="@+id/namePlayerFirstTeamTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
                                     android:text="@string/FullName"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/numberPlayerTextView"
@@ -629,6 +733,7 @@
                                     android:id="@+id/captainFirstTeamTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
                                     android:text="К"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/goalkeeperFirstTeamTextView"
@@ -638,6 +743,7 @@
                                     android:id="@+id/viewColor2"
                                     android:layout_width="10dp"
                                     android:layout_height="10dp"
+                                    android:layout_marginEnd="8dp"
                                     android:background="#1DE81C"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/captainFirstTeamTextView"
@@ -647,6 +753,7 @@
                                     android:id="@+id/viewColor1"
                                     android:layout_width="10dp"
                                     android:layout_height="10dp"
+                                    android:layout_marginEnd="8dp"
                                     android:background="#FF0141"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/viewColor2"
@@ -657,7 +764,7 @@
                                 android:id="@+id/firstTeamCompositionRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@+id/headerRecyclerCompositionFirstTeam"/>
+                                app:layout_constraintTop_toBottomOf="@+id/headerRecyclerCompositionFirstTeam" />
 
                             <View
                                 android:id="@+id/compositionFirstTeamSeparator"
@@ -693,7 +800,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:cardCornerRadius="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:backgroundTint="@color/mainBG"
+                    android:backgroundTint="@color/transparent"
                     app:strokeColor="@color/transparent"
                     app:layout_constraintTop_toTopOf="parent">
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -703,7 +810,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/compositionSecondTeamConstraintLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -721,7 +828,7 @@
                                 android:id="@+id/arrowDownCompositionSecondTeamImageView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="16dp"
+                                android:layout_marginEnd="8dp"
                                 android:src="@drawable/arrow_down_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -731,16 +838,18 @@
                                 android:id="@+id/separator6"
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
+                                android:layout_marginTop="16dp"
                                 android:background="@color/separator"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/secondTeamCompositionTextView" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/hiddenCompositionSecondTeamConstraintLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
                             android:visibility="gone"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/compositionSecondTeamConstraintLayout">
@@ -764,6 +873,7 @@
                                     android:id="@+id/namePlayerSecondTeamTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
                                     android:text="@string/FullName"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/numberPlayerSecondTeamTextView"
@@ -782,6 +892,7 @@
                                     android:id="@+id/captainSecondTeamTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginEnd="8dp"
                                     android:text="К"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/goalkeeperSecondTeamTextView"
@@ -791,6 +902,7 @@
                                     android:id="@+id/viewColorSecondTeam2"
                                     android:layout_width="10dp"
                                     android:layout_height="10dp"
+                                    android:layout_marginEnd="8dp"
                                     android:background="#1DE81C"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/captainSecondTeamTextView"
@@ -800,6 +912,7 @@
                                     android:id="@+id/viewColorSecondTeam1"
                                     android:layout_width="10dp"
                                     android:layout_height="10dp"
+                                    android:layout_marginEnd="8dp"
                                     android:background="#FF0141"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/viewColorSecondTeam2"
@@ -810,7 +923,7 @@
                                 android:id="@+id/secondTeamCompositionRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@+id/headerRecyclerCompositionSecondTeam"/>
+                                app:layout_constraintTop_toBottomOf="@+id/headerRecyclerCompositionSecondTeam" />
 
                             <View
                                 android:id="@+id/compositionSecondTeamSeparator"
@@ -847,8 +960,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:text="@string/Save"
                         android:textColor="#0078D2"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -879,8 +992,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:text="@string/SaveAndStartMatch"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"

@@ -5,9 +5,12 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
@@ -55,30 +58,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             pauseTimer()
         }
 
-        firstTeamScoreCountPlusImageView.setOnClickListener {
-            val score = firstTeamScoreTextView.text.toString().toInt()
-            firstTeamScoreTextView.text = (score + 1).toString()
-        }
 
-        firstTeamScoreCountMinusImageView.setOnClickListener {
-            val score = firstTeamScoreTextView.text.toString().toInt()
-            if (score != 0){
-                firstTeamScoreTextView.text = (score - 1).toString()
-            }
-        }
-
-        secondTeamScoreCountPlusImageView.setOnClickListener {
-            val score = secondTeamScoreTextView.text.toString().toInt()
-            secondTeamScoreTextView.text = (score + 1).toString()
-        }
-
-
-        secondTeamScoreCountMinusImageView.setOnClickListener {
-            val score = secondTeamScoreTextView.text.toString().toInt()
-            if (score != 0){
-                secondTeamScoreTextView.text = (score - 1).toString()
-            }
-        }
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
             if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && firstTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
@@ -158,6 +138,25 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             if (eventTimeEditText.text.isNotEmpty() && value > 0){
                 eventTimeEditText.text = Editable.Factory.getInstance().newEditable((value - 1 ).toString())
             }
+        }
+
+        menuImageButton.setOnClickListener {
+            val popupMenu = PopupMenu(requireContext(), it)
+            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+                when (item.itemId) {
+                    R.id.matchRegister -> {
+                        findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+                        true
+                    }
+                    R.id.exit -> {
+                        findNavController().navigate(R.id.action_matchProgressFragment_to_authorizationFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
         }
     }
 

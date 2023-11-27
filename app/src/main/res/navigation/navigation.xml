@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_prematchProtocolFragment_to_matchRegisterFragment"
             app:destination="@id/matchRegisterFragment" />
+        <action
+            android:id="@+id/action_prematchProtocolFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchProgressFragment"
@@ -46,5 +49,8 @@
         <action
             android:id="@+id/action_matchProgressFragment_to_matchRegisterFragment"
             app:destination="@id/matchRegisterFragment" />
+        <action
+            android:id="@+id/action_matchProgressFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
 </navigation>

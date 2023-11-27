@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/mainBG">
+    android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,16 +12,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/mainBG"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/user_profile_icon"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/menuImageButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/menuImageButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/menu_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#B8B8B8"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/MatchProgress"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/headerConstraint" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout11"
@@ -119,7 +167,7 @@
                             android:layout_weight="1">
 
                             <com.google.android.material.card.MaterialCardView
-                                style="@style/CustomScoreCardViewStyle"
+                                style="@style/CustomScoreUnfocusedCardViewStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="1dp"
@@ -138,6 +186,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="16dp"
+                                        android:clickable="false"
+                                        android:focusable="false"
                                         android:text="0"
                                         android:textSize="18sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -157,8 +207,10 @@
                                             android:id="@+id/firstTeamScoreCountPlusImageView"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
+                                            android:clickable="false"
+                                            android:focusable="false"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:background="#DCE5EA"
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
@@ -166,7 +218,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            android:background="#DCE5EA"
                                             android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -179,7 +233,7 @@
                             android:layout_weight="1">
 
                             <com.google.android.material.card.MaterialCardView
-                                style="@style/CustomScoreCardViewStyle"
+                                style="@style/CustomScoreUnfocusedCardViewStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="8dp"
@@ -199,6 +253,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="16dp"
                                         android:text="0"
+                                        android:clickable="false"
+                                        android:focusable="false"
                                         android:textSize="18sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +274,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:focusable="false"
+                                            android:clickable="false"
+                                            android:background="#DCE5EA"
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
@@ -226,7 +284,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:clickable="false"
+                                            android:focusable="false"
+                                            android:background="#DCE5EA"
                                             android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -235,31 +295,37 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                     <CheckBox
+                        android:id="@+id/checkBox2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:buttonTint="#B8CAD5"
                         android:text="@string/Penalty"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <CheckBox
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
                         android:buttonTint="#B8CAD5"
                         android:text="@string/TechnicalDefeat"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/checkBox2"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -311,27 +377,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:id="@+id/imageView"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="24dp"
-                                android:src="@drawable/arrow_start_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:text="@string/Start"
-                                android:textColor="@color/white"
-                                android:textSize="16sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                <ImageView
+                                    android:id="@+id/imageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrow_start_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="@string/Start"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -341,7 +414,7 @@
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/mainBG"
+                        android:backgroundTint="@color/white"
                         app:cardCornerRadius="20dp"
                         app:strokeColor="#0078D2">
 
@@ -349,27 +422,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:id="@+id/imageView1"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="24dp"
-                                android:src="@drawable/pause_blue_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:text="@string/Pause"
-                                android:textColor="#0078D2"
-                                android:textSize="16sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView1"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                <ImageView
+                                    android:id="@+id/imageView1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/pause_blue_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="@string/Pause"
+                                    android:textColor="#0078D2"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView1"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -378,7 +458,7 @@
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/mainBG"
+                        android:backgroundTint="@color/white"
                         app:cardCornerRadius="20dp"
                         app:strokeColor="#0078D2">
 
@@ -386,27 +466,34 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <ImageView
-                                android:id="@+id/imageView2"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="24dp"
-                                android:src="@drawable/stop_blue_icon"
                                 app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:text="@string/Stop"
-                                android:textColor="#0078D2"
-                                android:textSize="16sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                <ImageView
+                                    android:id="@+id/imageView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/stop_blue_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="@string/Stop"
+                                    android:textColor="#0078D2"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
@@ -484,11 +571,15 @@
 
                             <TextView
                                 android:id="@+id/textView14"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="ФК Локо"
                                 android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -539,11 +630,15 @@
 
                             <TextView
                                 android:id="@+id/textView16"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="ФК Крылья советов"
                                 android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -640,11 +735,15 @@
 
                             <TextView
                                 android:id="@+id/textView18"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="ФК Локо"
                                 android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -695,11 +794,15 @@
 
                             <TextView
                                 android:id="@+id/textView19"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:text="ФК Крылья советов"
                                 android:textSize="14sp"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -770,20 +873,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner">
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/MatchEvents"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/textView22"
@@ -798,6 +894,7 @@
                         android:id="@+id/spinner2"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:background="@drawable/custom_spinner_style"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -815,6 +912,7 @@
                         android:id="@+id/spinner3"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:background="@drawable/custom_spinner_style"
                         app:layout_constraintTop_toBottomOf="@+id/tv" />
 
                     <TextView
@@ -829,7 +927,7 @@
                     <LinearLayout
                         android:id="@+id/linearLayout2"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -857,12 +955,13 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginEnd="16dp"
+                                    android:layout_marginBottom="-4dp"
                                     android:backgroundTint="@color/transparent"
                                     android:gravity="center"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:maxLines="1"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -897,17 +996,19 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1">
 
                             <Switch
                                 android:id="@+id/switch1"
                                 android:layout_width="50dp"
-                                android:layout_height="40dp"
+                                android:layout_height="20dp"
                                 android:layout_weight="1"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                android:thumb="@drawable/switch_thumb_custom_style"
+                                android:track="@drawable/switch_track_custom_style"
                                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                             <TextView
@@ -915,6 +1016,8 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:paddingStart="8dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
                                 android:text="@string/UseTimerTime"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -928,11 +1031,10 @@
                         android:id="@+id/resetCardView"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/mainBG"
+                        android:backgroundTint="@color/transparent"
                         app:cardCornerRadius="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -964,7 +1066,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_weight="1"
                         android:backgroundTint="#0078D2"
@@ -997,6 +1098,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <TextView
+                android:id="@+id/matchEventsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/MatchEvents"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator1" />
+
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
@@ -1006,7 +1119,7 @@
                 android:text="@string/Event"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator1" />
+                app:layout_constraintTop_toBottomOf="@+id/matchEventsTextView" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -1014,6 +1127,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/custom_spinner_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -1078,7 +1192,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/mainBG"
+                android:backgroundTint="@color/transparent"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1092,8 +1206,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:text="@string/ExitLive"
                         android:textColor="#0078D2"
                         android:textSize="16sp"
@@ -1125,8 +1239,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
                         android:text="@string/FinishTheMatch"
                         android:textColor="@color/white"
                         android:textSize="16sp"
