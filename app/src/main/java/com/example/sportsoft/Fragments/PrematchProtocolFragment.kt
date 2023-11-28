@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -21,8 +22,6 @@ import com.example.sportsoft.databinding.PrematchProtocolFragmentBinding
 class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     private var _binding : PrematchProtocolFragmentBinding? = null
     private val binding get() = _binding!!
-    private val players1 = arrayOf("Игрок1", "Игрок2", "Игрок3", "Игрок4", "Игрок5")
-    private val players2 = arrayOf("Игрок6", "Игрок7", "Игрок8", "Игрок9", "Игрок10")
     private val firstTeamAdapter = TeamPlayersPrematchProtocolAdapter()
     private val secondTeamAdapter = TeamPlayersPrematchProtocolAdapter()
 
@@ -109,7 +108,7 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         }
 
         menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it)
+            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
             popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
@@ -128,8 +127,13 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         }
 
 
+        saveAndStartButton.setOnClickListener {
+            findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchProgressFragment)
+        }
 
-
+        saveAllButton.setOnClickListener {
+            findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
+        }
 
         firstTeamAdapter.setList(
             listOf(
@@ -340,6 +344,8 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
             )
         )
 
+        val refereeNameList = listOf("Николаев А.В.", "Николаев А.В.", "Николаев А.В.", "Николаев А.В.")
+        val refereePositionList = listOf("Главный судья", "Помощник главного судьи", "Резервный судья", "Резервный помощник судьи", "Дополнительный помощник")
 
         firstTeamCompositionRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         firstTeamCompositionRecyclerView.adapter = firstTeamAdapter
@@ -352,13 +358,20 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         val secondNameNamesList: List<String> = secondTeamAdapter.getList().map { player -> player.name }
 
         val firstTeamPlayerSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, firstNameNamesList)
-        firstTeamPlayerSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        firstTeamPlayerSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
         firstTeamPlayerSpinner.adapter = firstTeamPlayerSpinnerAdapter
 
         val secondTeamPlayerSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, secondNameNamesList)
-        secondTeamPlayerSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        secondTeamPlayerSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
         secondTeamPlayerSpinner.adapter = secondTeamPlayerSpinnerAdapter
 
+        val refereeNameSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, refereeNameList)
+        refereeNameSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
+        refereeSpinner.adapter = refereeNameSpinnerAdapter
+
+        val refereePositionSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, refereePositionList)
+        refereePositionSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
+        refereePositionSpinner.adapter = refereePositionSpinnerAdapter
     }
 
 

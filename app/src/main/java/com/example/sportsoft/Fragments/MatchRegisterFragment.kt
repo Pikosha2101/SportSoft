@@ -2,6 +2,7 @@ package com.example.sportsoft.Fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -16,15 +17,16 @@ import com.example.sportsoft.Listener
 import com.example.sportsoft.Models.MatchModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterFragmentBinding
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listener<MatchModel>{
     private var _binding : MatchRegisterFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = MatchRecyclerAdapter(this)
-    private val calendar = Calendar.getInstance()
     private var selectedFromDate: Calendar? = null
-
+    private var selectedToDate: Calendar? = null
 
 
     override fun onCreateView(
@@ -66,7 +68,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         }
 
         menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it)
+            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
             popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
@@ -193,44 +195,65 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
     }
 
-
-
     private fun showDatePickerFromDialog() {
+        val currentDate = Calendar.getInstance()
+
         val datePickerDialog = DatePickerDialog(
             requireContext(),
+            R.style.DatePickerDialogStyle,
             { _, year, month, dayOfMonth ->
-                selectedFromDate = Calendar.getInstance().apply {
+                val selectedDate = Calendar.getInstance().apply {
                     set(year, month, dayOfMonth)
                 }
 
-                val selectedDate = "$dayOfMonth.${month + 1}.$year"
-                binding.dateFromEditText.text = selectedDate
+                if (selectedDate.after(currentDate)) {
+                    selectedFromDate = currentDate
+                } else {
+                    selectedFromDate = selectedDate
+                }
+
+                val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                binding.dateFromEditText.text = formattedDate.format(selectedFromDate!!.time)
             },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+            currentDate.get(Calendar.YEAR),
+            currentDate.get(Calendar.MONTH),
+            currentDate.get(Calendar.DAY_OF_MONTH)
         )
+
+        datePickerDialog.datePicker.maxDate = currentDate.timeInMillis
 
         datePickerDialog.show()
     }
 
-
-
     private fun showDatePickerToDialog() {
+        val currentDate = Calendar.getInstance()
+
         val datePickerDialog = DatePickerDialog(
             requireContext(),
+            R.style.DatePickerDialogStyle,
             { _, year, month, dayOfMonth ->
-                selectedFromDate = Calendar.getInstance().apply {
+                val selectedDate = Calendar.getInstance().apply {
                     set(year, month, dayOfMonth)
                 }
 
-                val selectedDate = "$dayOfMonth.${month + 1}.$year"
-                binding.dateFromEditText.text = selectedDate
+                if (selectedDate.before(selectedFromDate)) {
+                    selectedToDate = selectedFromDate
+                } else {
+                    selectedToDate = selectedDate
+                }
+
+                val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+                binding.dateToEditText.text = formattedDate.format(selectedToDate!!.time)
             },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+            currentDate.get(Calendar.YEAR),
+            currentDate.get(Calendar.MONTH),
+            currentDate.get(Calendar.DAY_OF_MONTH)
         )
+
+        datePickerDialog.datePicker.maxDate = currentDate.timeInMillis
+        selectedFromDate?.let {
+            datePickerDialog.datePicker.minDate = it.timeInMillis
+        }
 
         datePickerDialog.show()
     }

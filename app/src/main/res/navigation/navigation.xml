@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_prematchProtocolFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_prematchProtocolFragment_to_matchProgressFragment"
+            app:destination="@id/matchProgressFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchProgressFragment"

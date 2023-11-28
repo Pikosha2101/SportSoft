@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -58,7 +59,9 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             pauseTimer()
         }
 
-
+        finishCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+        }
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
             if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && firstTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
@@ -141,7 +144,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         }
 
         menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it)
+            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
             popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
