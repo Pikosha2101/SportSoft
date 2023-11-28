@@ -206,10 +206,10 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                     set(year, month, dayOfMonth)
                 }
 
-                if (selectedDate.after(currentDate)) {
-                    selectedFromDate = currentDate
+                selectedFromDate = if (selectedDate.after(currentDate)) {
+                    currentDate
                 } else {
-                    selectedFromDate = selectedDate
+                    selectedDate
                 }
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -236,10 +236,10 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                     set(year, month, dayOfMonth)
                 }
 
-                if (selectedDate.before(selectedFromDate)) {
-                    selectedToDate = selectedFromDate
+                selectedToDate = if (selectedDate.before(selectedFromDate)) {
+                    selectedFromDate
                 } else {
-                    selectedToDate = selectedDate
+                    selectedDate
                 }
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
