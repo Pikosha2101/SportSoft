@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -26,7 +28,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
     private lateinit var countUpTimer: CountUpTimer
     private lateinit var handler: Handler
-
+    private var eventsList = listOf("Гол", "Желтая карточка", "Красная карточка")
 
 
     override fun onCreateView(
@@ -161,6 +163,34 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
             popupMenu.show()
         }
+
+
+
+
+        val eventSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, eventsList)
+        eventSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
+        eventSpinner.adapter = eventSpinnerAdapter
+
+        eventSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long) {
+                val selectedFruit = eventsList[position]
+                when (selectedFruit){
+                    "Гол" -> {
+                        goalHiddenConstraintLayout.visibility = View.VISIBLE
+                        yellowCardHiddenConstraintLayout.visibility = View.GONE
+                    }
+                    "Желтая карточка" -> {
+                        goalHiddenConstraintLayout.visibility = View.GONE
+                        yellowCardHiddenConstraintLayout.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {
+
+            }
+        }
+
     }
 
 
