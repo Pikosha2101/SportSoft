@@ -195,6 +195,8 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
     }
 
+
+
     private fun showDatePickerFromDialog() {
         val currentDate = Calendar.getInstance()
 
@@ -224,6 +226,8 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
         datePickerDialog.show()
     }
+
+
 
     private fun showDatePickerToDialog() {
         val currentDate = Calendar.getInstance()

@@ -1,5 +1,6 @@
 package com.example.sportsoft.Fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,23 +13,40 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.sportsoft.Adapters.EventsRecyclerAdapter
 import com.example.sportsoft.CountUpTimer
+import com.example.sportsoft.Listener
+import com.example.sportsoft.Models.EventModel
 import com.example.sportsoft.R
+import com.example.sportsoft.R.drawable.cardview_available_style
+import com.example.sportsoft.R.drawable.cardview_unavailable_style
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
 
-class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
+class MatchProgressFragment : Fragment(R.layout.match_progress_fragment)/*, Listener<EventModel>*/ {
     private var _binding: MatchProgressFragmentBinding? = null
     private val binding get() = _binding!!
 
     private var isTimerRunning = false
     private var isTimerPaused = false
     private var secondsRemaining: Long = 0
-
     private lateinit var countUpTimer: CountUpTimer
     private lateinit var handler: Handler
-    private var eventsList = listOf("Гол", "Желтая карточка", "Красная карточка")
+    private var eventsTypeList = listOf("Гол", "Желтая карточка", "Красная карточка")
+    /*private val eventRecyclerAdapter = EventsRecyclerAdapter(this)*/
+    private val eventsList = listOf(
+        EventModel(
+            "Гол",
+            "Ю.В. Жирков",
+            "А.А.Кокорин",
+            "39"
+        )
+    )
+
 
 
     override fun onCreateView(
@@ -166,15 +184,13 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
 
-
-        val eventSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, eventsList)
+        val eventSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, eventsTypeList)
         eventSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
         eventSpinner.adapter = eventSpinnerAdapter
 
         eventSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long) {
-                val selectedFruit = eventsList[position]
-                when (selectedFruit){
+                when (eventsTypeList[position]){
                     "Гол" -> {
                         goalHiddenConstraintLayout.visibility = View.VISIBLE
                         yellowCardHiddenConstraintLayout.visibility = View.GONE
@@ -191,6 +207,9 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
         }
 
+        /*eventRecyclerAdapter.setEventList(eventsList)
+        eventsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        eventsRecyclerView.adapter = eventRecyclerAdapter*/
     }
 
 
@@ -207,6 +226,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         countUpTimer.startTimer()
         isTimerRunning = true
         isTimerPaused = false
+        changePauseAvailableButtonStyle()
+        changeStopAvailableButtonStyle()
     }
 
 
@@ -217,6 +238,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             isTimerRunning = true
             isTimerPaused = false
         }
+        changePauseAvailableButtonStyle()
     }
 
 
@@ -229,6 +251,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             secondsRemaining = 0
             updateTimerText()
         }
+        changeStopUnavailableButtonStyle()
+        changePauseUnavailableButtonStyle()
     }
 
 
@@ -240,6 +264,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             isTimerPaused = true
             updateTimerText()
         }
+        changePauseUnavailableButtonStyle()
     }
 
 
@@ -257,4 +282,44 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         super.onDestroy()
         _binding = null
     }
+
+
+    private fun changePauseAvailableButtonStyle(){
+        binding.pauseCardView.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), cardview_available_style))
+        binding.pauseTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+        binding.pauseButtonImageView.setImageResource(R.drawable.pause_blue_icon)
+    }
+
+
+    private fun changePauseUnavailableButtonStyle(){
+        binding.pauseCardView.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), cardview_unavailable_style))
+        binding.pauseTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        binding.pauseButtonImageView.setImageResource(R.drawable.pause_unavailabe_icon)
+    }
+
+
+    private fun changeStopAvailableButtonStyle(){
+        binding.stopCardView.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), cardview_available_style))
+        binding.stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+        binding.stopButtonImageView.setImageResource(R.drawable.stop_blue_icon)
+    }
+
+
+    private fun changeStopUnavailableButtonStyle(){
+        binding.stopCardView.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), cardview_unavailable_style))
+        binding.stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        binding.stopButtonImageView.setImageResource(R.drawable.stop_unavailable_icon)
+
+    }
+
+
+    /*override fun onClickEdit(param: EventModel) {
+        TODO("Not yet implemented")
+    }
+
+
+
+    override fun onClickStart(param: EventModel) {
+        TODO("Not yet implemented")
+    }*/
 }
