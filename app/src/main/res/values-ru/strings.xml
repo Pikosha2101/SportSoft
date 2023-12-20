@@ -45,4 +45,8 @@
     <string name="Number">Номер</string>
     <string name="Save">Сохранить</string>
     <string name="SaveAndStartMatch">Сохранить и начать матч</string>
+    <string name="IncorrectData">Некорректные данные</string>
+    <string name="EnterAllDetails">Введите все данные</string>
+    <string name="NetworkError">Ошибка сети</string>
+    <string name="TheRequestFailed">Ошибка запроса</string>
 </resources>

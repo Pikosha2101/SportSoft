@@ -44,4 +44,8 @@
     <string name="Number">Number</string>
     <string name="Save">Save</string>
     <string name="SaveAndStartMatch">Save and start match</string>
+    <string name="IncorrectData">Incorrect data</string>
+    <string name="EnterAllDetails">Enter all details</string>
+    <string name="NetworkError">Network error</string>
+    <string name="TheRequestFailed">The request failed</string>
 </resources>
