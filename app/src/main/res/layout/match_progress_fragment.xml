@@ -386,7 +386,7 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
-                                    android:id="@+id/imageView"
+                                    android:id="@+id/startImageView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/arrow_start_icon"
@@ -395,6 +395,7 @@
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
+                                    android:id="@+id/startTimerTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
@@ -402,7 +403,7 @@
                                     android:textColor="@color/white"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                                    app:layout_constraintStart_toEndOf="@+id/startImageView"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -414,9 +415,8 @@
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:strokeColor="#0078D2">
+                        android:background="@drawable/cardview_unavailable_style"
+                        app:cardCornerRadius="20dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -431,23 +431,24 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
-                                    android:id="@+id/imageView1"
+                                    android:id="@+id/pauseButtonImageView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/pause_blue_icon"
+                                    android:src="@drawable/pause_unavailabe_icon"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
+                                    android:id="@+id/pauseTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:text="@string/Pause"
-                                    android:textColor="#0078D2"
+                                    android:textColor="@color/unavailableText"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView1"
+                                    app:layout_constraintStart_toEndOf="@+id/pauseButtonImageView"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -458,9 +459,8 @@
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:strokeColor="#0078D2">
+                        android:background="@drawable/cardview_unavailable_style"
+                        app:cardCornerRadius="20dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -475,23 +475,24 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
-                                    android:id="@+id/imageView2"
+                                    android:id="@+id/stopButtonImageView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/stop_blue_icon"
+                                    android:src="@drawable/stop_unavailable_icon"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
+                                    android:id="@+id/stopTextView"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="8dp"
                                     android:text="@string/Stop"
-                                    android:textColor="#0078D2"
+                                    android:textColor="@color/unavailableText"
                                     android:textSize="16sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                                    app:layout_constraintStart_toEndOf="@+id/stopButtonImageView"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1615,7 +1616,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView2"
+                    android:id="@+id/eventsRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -1631,7 +1632,7 @@
                     android:backgroundTint="@color/separator"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventsRecyclerView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.card.MaterialCardView

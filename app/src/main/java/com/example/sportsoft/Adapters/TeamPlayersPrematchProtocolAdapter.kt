@@ -52,6 +52,8 @@ class TeamPlayersPrematchProtocolAdapter() :
         playerModels = list
     }
 
+
+
     fun getList() : List<PlayerModel> {
         return playerModels
     }

@@ -24,10 +24,10 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
             secondTeamNameTextView.text = matchModel.secondTeamName
             firstTeamScoreTextView.text = matchModel.firstTeamScore.toString()
             secondTeamScoreTextView.text = matchModel.secondTeamScore.toString()
-            openImageButton.setOnClickListener {
+            openMatchProgressCardView.setOnClickListener {
                 listener.onClickStart(matchModel)
             }
-            editImageButton.setOnClickListener {
+            openPrematchProtocolCardView.setOnClickListener {
                 listener.onClickEdit(matchModel)
             }
         }

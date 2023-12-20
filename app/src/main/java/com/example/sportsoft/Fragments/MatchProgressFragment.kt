@@ -173,7 +173,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
         eventSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long) {
-                when (eventsList[position]){
+                val selectedFruit = eventsList[position]
+                when (selectedFruit){
                     "Гол" -> {
                         goalHiddenConstraintLayout.visibility = View.VISIBLE
                         yellowCardHiddenConstraintLayout.visibility = View.GONE
