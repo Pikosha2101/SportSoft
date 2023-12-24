@@ -330,7 +330,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="8dp"
                     android:background="@color/separator"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -417,10 +417,11 @@
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
-                        style="@style/UnavailableCardView"
+                        android:backgroundTint="@color/transparent"
                         app:cardCornerRadius="20dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/pauseConstraintLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -461,10 +462,11 @@
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
-                        style="@style/UnavailableCardView"
+                        android:backgroundTint="@color/transparent"
                         app:cardCornerRadius="20dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/stopConstraintLayout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -937,8 +939,7 @@
                         <LinearLayout
                             android:id="@+id/timeGoalLinearLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -947,7 +948,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 style="@style/CustomScoreCardViewStyle"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="40dp"
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_weight="1.2"
@@ -963,7 +964,7 @@
                                     <EditText
                                         android:id="@+id/eventTimeGoalEditText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="40dp"
                                         android:layout_marginEnd="16dp"
                                         android:layout_marginBottom="-4dp"
                                         android:backgroundTint="@color/transparent"
@@ -979,7 +980,7 @@
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="40dp"
                                         android:orientation="vertical"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
@@ -1006,7 +1007,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
 
                                 <Switch
@@ -1023,10 +1024,11 @@
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="0dp"
                                     android:layout_weight="1"
                                     android:ellipsize="end"
                                     android:maxLines="2"
+                                    android:gravity="fill_vertical"
                                     android:paddingStart="8dp"
                                     android:text="@string/UseTimerTime"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1161,8 +1163,7 @@
                         <LinearLayout
                             android:id="@+id/timeYellowCardLinearLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1171,7 +1172,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 style="@style/CustomScoreCardViewStyle"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="40dp"
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_weight="1.2"
@@ -1187,9 +1188,8 @@
                                     <EditText
                                         android:id="@+id/eventTimeEditText"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="40dp"
                                         android:layout_marginEnd="16dp"
-                                        android:layout_marginBottom="-4dp"
                                         android:backgroundTint="@color/transparent"
                                         android:gravity="center"
                                         android:imeOptions="actionDone"
@@ -1203,7 +1203,7 @@
 
                                     <LinearLayout
                                         android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="40dp"
                                         android:orientation="vertical"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toEndOf="parent"
@@ -1230,7 +1230,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
 
                                 <Switch
@@ -1247,10 +1247,11 @@
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="0dp"
                                     android:layout_weight="1"
                                     android:ellipsize="end"
                                     android:maxLines="2"
+                                    android:gravity="fill_vertical"
                                     android:paddingStart="8dp"
                                     android:text="@string/UseTimerTime"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1381,8 +1382,7 @@
                         <LinearLayout
                             android:id="@+id/timeRedCardLinearLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_height="40dp"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1391,7 +1391,7 @@
                             <com.google.android.material.card.MaterialCardView
                                 style="@style/CustomScoreCardViewStyle"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="40dp"
                                 android:layout_marginStart="1dp"
                                 android:layout_marginEnd="8dp"
                                 android:layout_weight="1.2"
@@ -1402,14 +1402,12 @@
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="40dp">
 
                                     <EditText
                                         android:id="@+id/eventTimeRedCardEditText"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginEnd="16dp"
-                                        android:layout_marginBottom="-4dp"
+                                        android:layout_width="0dp"
+                                        android:layout_height="40dp"
                                         android:backgroundTint="@color/transparent"
                                         android:gravity="center"
                                         android:imeOptions="actionDone"
@@ -1417,11 +1415,12 @@
                                         android:maxLines="1"
                                         android:textSize="16sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/redCardMinuteLinearLayout"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent" />
 
                                     <LinearLayout
+                                        android:id="@+id/redCardMinuteLinearLayout"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:orientation="vertical"
@@ -1450,7 +1449,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1">
 
                                 <Switch
@@ -1467,10 +1466,11 @@
 
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="0dp"
                                     android:layout_weight="1"
                                     android:ellipsize="end"
                                     android:maxLines="2"
+                                    android:gravity="fill_vertical"
                                     android:paddingStart="8dp"
                                     android:text="@string/UseTimerTime"
                                     app:layout_constraintBottom_toBottomOf="parent"
