@@ -12,11 +12,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsoft.API.MatchHostnameVerifier
+import com.example.sportsoft.API.MatchInterceptor
+import com.example.sportsoft.API.ApiModels.MatchResponse
+import com.example.sportsoft.API.ApiModels.MatchesModel
+import com.example.sportsoft.API.ApiService
+import com.example.sportsoft.API.Server
 import com.example.sportsoft.Adapters.MatchRecyclerAdapter
 import com.example.sportsoft.Listener
 import com.example.sportsoft.Models.MatchModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterFragmentBinding
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -27,7 +40,9 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     private val adapter = MatchRecyclerAdapter(this)
     private var selectedFromDate: Calendar? = null
     private var selectedToDate: Calendar? = null
-
+    private lateinit var userToken: String
+    private val PREFS_NAME = "SharedPreferences"
+    private val USER_TOKEN = "Token"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +57,20 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
+        userToken = sharedPreferences.getString(USER_TOKEN, "").toString()
+
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = createOkHttpClient(interceptor, userToken)
+        val retrofit = createRetrofitInstance(client)
+        val apiService = retrofit.create(ApiService::class.java)
+        val request = MatchesModel(Server().getToken(), userToken)
+        val call = apiService.getMatches(request)
+        serverRequest(call)
+
+
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
@@ -260,5 +289,50 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         }
 
         datePickerDialog.show()
+    }
+
+
+
+    private fun createOkHttpClient(
+        interceptor: HttpLoggingInterceptor,
+        accessToken: String): OkHttpClient{
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .addInterceptor(MatchInterceptor(accessToken))
+            .hostnameVerifier(MatchHostnameVerifier())
+            .build()
+    }
+
+
+
+    private fun createRetrofitInstance(client: OkHttpClient): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(Server().getServer())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
+
+
+    private fun serverRequest(call: Call<MatchResponse>){
+        call.enqueue(object : Callback<MatchResponse> {
+            override fun onResponse(call: Call<MatchResponse>, response: Response<MatchResponse>) {
+                if (response.isSuccessful) {
+                    val matchResponse = response.body()
+                    if (matchResponse?.success == true) {
+                        Toast.makeText(requireContext(), "Корректно получаются данные", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Даннные получены некорректно", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(requireContext(), R.string.NetworkError, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MatchResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), R.string.TheRequestFailed, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

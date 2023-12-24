@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.API.ApiService
-import com.example.sportsoft.API.LoginRequest
-import com.example.sportsoft.API.LoginResponse
-import com.example.sportsoft.API.MyInterceptor
+import com.example.sportsoft.API.ApiModels.LoginRequest
+import com.example.sportsoft.API.ApiModels.LoginResponse
+import com.example.sportsoft.API.AuthInterceptor
 import com.example.sportsoft.API.Server
-import com.example.sportsoft.API.MyHostnameVerifier
+import com.example.sportsoft.API.AuthHostnameVerifier
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.AuthorizationFragmentBinding
 import okhttp3.OkHttpClient
@@ -25,7 +25,8 @@ import java.util.Base64
 class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
     private var _binding : AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private val PREFS_NAME = "SharedPreferences"
+    private val USER_TOKEN = "Token"
 
 
     override fun onCreateView(
@@ -88,6 +89,8 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
                 if(response.isSuccessful){
                     val apiResponse = response.body()
                     if (apiResponse != null && apiResponse.success){
+                        val sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
+                        sharedPreferences.edit().putString(USER_TOKEN, apiResponse.token).apply()
                         findNavController().navigate(R.id.action_authorizationFragment_to_matchRegisterFragment)
                     } else {
                         Toast.makeText(requireContext(), R.string.IncorrectData, Toast.LENGTH_SHORT).show()
@@ -120,8 +123,8 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
         authData: String): OkHttpClient{
         return OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(MyInterceptor(authData))
-            .hostnameVerifier(MyHostnameVerifier())
+            .addInterceptor(AuthInterceptor(authData))
+            .hostnameVerifier(AuthHostnameVerifier())
             .build()
     }
 }

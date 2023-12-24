@@ -3,7 +3,6 @@ package com.example.sportsoft.Fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -12,10 +11,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
+import com.example.sportsoft.R.color.blue
+import com.example.sportsoft.R.color.white
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
 
 class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
@@ -51,14 +53,26 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             } else if (isTimerPaused) {
                 resumeTimer()
             }
+            startCardView.strokeColor = resources.getColor(R.color.unavailableText)
+            startTimeConstraintLayout.setBackgroundColor(resources.getColor(white))
+            startTimerTextView.setTextColor(resources.getColor(R.color.unavailableText))
+            startImageView.setImageResource(R.drawable.arrow_start_icon_unavailable)
         }
 
         stopCardView.setOnClickListener {
             stopTimer()
+            startCardView.strokeColor = resources.getColor(R.color.blue)
+            startTimeConstraintLayout.setBackgroundColor(resources.getColor(blue))
+            startTimerTextView.setTextColor(resources.getColor(R.color.white))
+            startImageView.setImageResource(R.drawable.arrow_start_icon)
         }
 
         pauseCardView.setOnClickListener {
             pauseTimer()
+            startCardView.strokeColor = resources.getColor(R.color.blue)
+            startTimeConstraintLayout.setBackgroundColor(resources.getColor(blue))
+            startTimerTextView.setTextColor(resources.getColor(R.color.white))
+            startImageView.setImageResource(R.drawable.arrow_start_icon)
         }
 
         finishCardView.setOnClickListener {
@@ -66,83 +80,43 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         }
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
-            if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && firstTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
-                val score = firstTeamFoulsCountFirstTimeTextView.text.toString().toInt()
-                firstTeamFoulsCountFirstTimeTextView.text = (score - 1).toString()
-            }
+            handleButtonClick(firstTeamFoulsCountFirstTimeTextView, increment = false, 0)
         }
 
         firstTeamFoulsCountPlusFirstTimeImageButton.setOnClickListener {
-            if (firstTeamFoulsCountFirstTimeTextView.text.isNotEmpty()){
-                val score = firstTeamFoulsCountFirstTimeTextView.text.toString().toInt()
-                firstTeamFoulsCountFirstTimeTextView.text = (score + 1).toString()
-            } else {
-                firstTeamFoulsCountFirstTimeTextView.text = (1).toString()
-            }
+            handleButtonClick(firstTeamFoulsCountFirstTimeTextView, increment = true)
         }
 
         secondTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
-            if (secondTeamFoulsCountFirstTimeTextView.text.isNotEmpty() && secondTeamFoulsCountFirstTimeTextView.text.toString().toInt() > 0){
-                val score = secondTeamFoulsCountFirstTimeTextView.text.toString().toInt()
-                secondTeamFoulsCountFirstTimeTextView.text = (score - 1).toString()
-            }
+            handleButtonClick(secondTeamFoulsCountFirstTimeTextView, increment = false, 0)
         }
 
         secondTeamFoulsCountPlusFirstTimeImageButton.setOnClickListener {
-            if (secondTeamFoulsCountFirstTimeTextView.text.isNotEmpty()){
-                val score = secondTeamFoulsCountFirstTimeTextView.text.toString().toInt()
-                secondTeamFoulsCountFirstTimeTextView.text = (score + 1).toString()
-            } else {
-                secondTeamFoulsCountFirstTimeTextView.text = (1).toString()
-            }
+            handleButtonClick(secondTeamFoulsCountFirstTimeTextView, increment = true)
         }
 
         firstTeamFoulsCountMinusSecondTimeImageButton.setOnClickListener {
-            if (firstTeamFoulsCountSecondTimeTextView.text.isNotEmpty() && firstTeamFoulsCountSecondTimeTextView.text.toString().toInt() > 0){
-                val score = firstTeamFoulsCountSecondTimeTextView.text.toString().toInt()
-                firstTeamFoulsCountSecondTimeTextView.text = (score - 1).toString()
-            }
+            handleButtonClick(firstTeamFoulsCountSecondTimeTextView, increment = false, 0)
         }
 
         firstTeamFoulsCountPlusSecondTimeImageButton.setOnClickListener {
-            if (firstTeamFoulsCountSecondTimeTextView.text.isNotEmpty()){
-                val score = firstTeamFoulsCountSecondTimeTextView.text.toString().toInt()
-                firstTeamFoulsCountSecondTimeTextView.text = (score + 1).toString()
-            } else {
-                firstTeamFoulsCountSecondTimeTextView.text = (1).toString()
-            }
+            handleButtonClick(firstTeamFoulsCountSecondTimeTextView, increment = true)
         }
 
         secondTeamFoulsCountMinusSecondTimeImageButton.setOnClickListener {
-            if (secondTeamFoulsCountSecondTimeTextView.text.isNotEmpty() && secondTeamFoulsCountSecondTimeTextView.text.toString().toInt() > 0){
-                val score = secondTeamFoulsCountSecondTimeTextView.text.toString().toInt()
-                secondTeamFoulsCountSecondTimeTextView.text = (score - 1).toString()
-            }
+            handleButtonClick(secondTeamFoulsCountSecondTimeTextView, increment = false, 0)
         }
 
         secondTeamFoulsCountPlusSecondTimeImageButton.setOnClickListener {
-            if (secondTeamFoulsCountSecondTimeTextView.text.isNotEmpty()){
-                val score = secondTeamFoulsCountSecondTimeTextView.text.toString().toInt()
-                secondTeamFoulsCountSecondTimeTextView.text = (score + 1).toString()
-            } else {
-                secondTeamFoulsCountSecondTimeTextView.text = (1).toString()
-            }
+            handleButtonClick(secondTeamFoulsCountSecondTimeTextView, increment = true)
         }
 
         eventTimePlusImageButton.setOnClickListener {
-            if (eventTimeEditText.text.isNotEmpty()){
-                val value = eventTimeEditText.text.toString().toInt()
-                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((value + 1).toString())
-            } else {
-                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((1).toString())
-            }
+            handleButtonClick(eventTimeEditText, increment = true)
         }
 
         eventTimeMinusImageButton.setOnClickListener {
-            val value = eventTimeEditText.text.toString().toInt()
-            if (eventTimeEditText.text.isNotEmpty() && value > 0){
-                eventTimeEditText.text = Editable.Factory.getInstance().newEditable((value - 1 ).toString())
-            }
+            handleButtonClick(eventTimeEditText, increment = false, 0)
         }
 
         menuImageButton.setOnClickListener {
@@ -190,7 +164,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
             }
         }
-
     }
 
 
@@ -249,6 +222,21 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         val seconds = secondsRemaining % 60
         val timeString = String.format("%02d:%02d", minutes, seconds)
         binding.timerTextView.text = timeString
+    }
+
+
+
+    private fun handleButtonClick(
+        textView: TextView,
+        increment: Boolean,
+        minValue: Int = 0
+    ) {
+        if (textView.text.isNotEmpty()) {
+            val value = textView.text.toString().toInt()
+            textView.text = (if (increment) value + 1 else value - 1).coerceAtLeast(minValue).toString()
+        } else {
+            textView.text = (if (increment) 1 else minValue).toString()
+        }
     }
 
 
