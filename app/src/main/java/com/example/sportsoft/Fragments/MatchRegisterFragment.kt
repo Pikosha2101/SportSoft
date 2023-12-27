@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsoft.API.ApiModels.MatchInfo
 import com.example.sportsoft.API.MatchHostnameVerifier
 import com.example.sportsoft.API.MatchInterceptor
 import com.example.sportsoft.API.ApiModels.MatchResponse
@@ -20,7 +21,6 @@ import com.example.sportsoft.API.ApiService
 import com.example.sportsoft.API.Server
 import com.example.sportsoft.Adapters.MatchRecyclerAdapter
 import com.example.sportsoft.Listener
-import com.example.sportsoft.Models.MatchModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterFragmentBinding
 import okhttp3.OkHttpClient
@@ -34,7 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listener<MatchModel>{
+class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listener<MatchInfo>{
     private var _binding : MatchRegisterFragmentBinding? = null
     private val binding get() = _binding!!
     private val adapter = MatchRecyclerAdapter(this)
@@ -114,95 +114,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
             }
             popupMenu.show()
         }
-
-        adapter.setList(
-            listOf(
-                MatchModel(
-                    "22.11.23",
-                    "ФК Спартак",
-                    "ФК Краснодар",
-                    2,
-                    1
-                ),
-                MatchModel(
-                    "23.11.23",
-                    "ФК Зенит",
-                    "ФК Тосно",
-                    0,
-                    1
-                ),
-                MatchModel(
-                    "24.11.23",
-                    "ФК Крылья Советов",
-                    "ФК Локомотив",
-                    2,
-                    2
-                ),
-                MatchModel(
-                    "25.11.23",
-                    "ФК Урал",
-                    "ФК Спартак",
-                    0,
-                    0
-                ),
-                MatchModel(
-                    "26.11.23",
-                    "ФК Спартак",
-                    "ФК Краснодар",
-                    2,
-                    1
-                ),
-                MatchModel(
-                    "27.11.23",
-                    "ФК Зенит",
-                    "ФК Тосно",
-                    0,
-                    1
-                ),
-                MatchModel(
-                    "28.11.23",
-                    "ФК Крылья Советов",
-                    "ФК Локомотив",
-                    2,
-                    2
-                ),
-                MatchModel(
-                    "29.11.23",
-                    "ФК Урал",
-                    "ФК Спартак",
-                    0,
-                    0
-                ),
-                MatchModel(
-                    "26.11.23",
-                    "ФК Спартак",
-                    "ФК Краснодар",
-                    2,
-                    1
-                ),
-                MatchModel(
-                    "27.11.23",
-                    "ФК Зенит",
-                    "ФК Тосно",
-                    0,
-                    1
-                ),
-                MatchModel(
-                    "28.11.23",
-                    "ФК Крылья Советов",
-                    "ФК Локомотив",
-                    2,
-                    2
-                ),
-                MatchModel(
-                    "29.11.23",
-                    "ФК Урал",
-                    "ФК Спартак",
-                    0,
-                    0
-                )
-            )
-        )
     }
 
 
@@ -214,13 +125,13 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
 
 
-    override fun onClickEdit(param: MatchModel) {
+    override fun onClickEdit(param: MatchInfo) {
         findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
     }
 
 
 
-    override fun onClickStart(param: MatchModel) {
+    override fun onClickStart(param: MatchInfo) {
         findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
     }
 
@@ -321,7 +232,8 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                 if (response.isSuccessful) {
                     val matchResponse = response.body()
                     if (matchResponse?.success == true) {
-                        Toast.makeText(requireContext(), "Корректно получаются данные", Toast.LENGTH_SHORT).show()
+                        adapter.setList(matchResponse.matches ?: emptyList())
+                        //Toast.makeText(requireContext(), "Корректно получаются данные", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Даннные получены некорректно", Toast.LENGTH_SHORT).show()
                     }

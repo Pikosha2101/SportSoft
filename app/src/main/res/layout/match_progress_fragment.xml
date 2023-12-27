@@ -1340,7 +1340,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -1457,6 +1457,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="20dp"
                                     android:layout_weight="1"
+                                    android:checked="true"
                                     android:thumb="@drawable/switch_thumb_custom_style"
                                     android:track="@drawable/switch_track_custom_style"
                                     app:layout_constraintBottom_toBottomOf="parent"

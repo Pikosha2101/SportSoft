@@ -1,29 +1,29 @@
 package com.example.sportsoft.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sportsoft.API.ApiModels.MatchInfo
 import com.example.sportsoft.Listener
-import com.example.sportsoft.Models.MatchModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterRecyclerItemBinding
 
-class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
+class MatchRecyclerAdapter(private val listener : Listener<MatchInfo>) :
     RecyclerView.Adapter<MatchRecyclerAdapter.Holder>(){
 
-    private var matchModels: List<MatchModel> = listOf()
+    private var matchModels: List<MatchInfo> = listOf()
 
-    class Holder(item: View) : RecyclerView.ViewHolder(item)
-    {
+    class Holder(item: View) : RecyclerView.ViewHolder(item) {
         private val binding = MatchRegisterRecyclerItemBinding.bind(item)
 
-        fun bind(matchModel: MatchModel, listener: Listener<MatchModel>) = with(binding) {
-            dateTextView.text = matchModel.date
-            firstTeamNameTextView.text = matchModel.firstTeamName
-            secondTeamNameTextView.text = matchModel.secondTeamName
-            firstTeamScoreTextView.text = matchModel.firstTeamScore.toString()
-            secondTeamScoreTextView.text = matchModel.secondTeamScore.toString()
+        fun bind(matchModel: MatchInfo, listener: Listener<MatchInfo>) = with(binding) {
+            dateTextView.text = matchModel.start_dt
+            firstTeamNameTextView.text = matchModel.team1_shortname
+            secondTeamNameTextView.text = matchModel.team2_shortname
+            firstTeamScoreTextView.text = matchModel.gf.toString()
+            secondTeamScoreTextView.text = matchModel.ga.toString()
             openMatchProgressCardView.setOnClickListener {
                 listener.onClickStart(matchModel)
             }
@@ -56,8 +56,9 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchModel>) :
 
 
 
-    fun setList(list:List<MatchModel>)
-    {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list:List<MatchInfo>) {
         matchModels = list
+        notifyDataSetChanged()
     }
 }

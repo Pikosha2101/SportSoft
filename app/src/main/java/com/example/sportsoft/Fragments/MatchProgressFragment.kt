@@ -18,7 +18,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
-import com.example.sportsoft.R.color.white
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
 
 class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
@@ -145,6 +144,14 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
         eventTimeMinusImageButton.setOnClickListener {
             handleButtonClick(eventTimeEditText, increment = false, 0)
+        }
+
+        redCardSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+
+            } else {
+
+            }
         }
 
         menuImageButton.setOnClickListener {

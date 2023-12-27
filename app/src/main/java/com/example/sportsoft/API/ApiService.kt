@@ -14,7 +14,6 @@ interface ApiService {
     @POST("api/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-
     @Headers("Content-Type: application/json")
     @POST("api/match")
     fun getMatches(@Body request: MatchesModel): Call<MatchResponse>

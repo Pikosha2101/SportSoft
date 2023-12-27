@@ -4,5 +4,5 @@ data class MatchResponse(
     val success: Boolean,
     val code: Int,
     val error: String?,
-    val matchs: List<MatchInfo>?
+    val matches: List<MatchInfo>?
 )
