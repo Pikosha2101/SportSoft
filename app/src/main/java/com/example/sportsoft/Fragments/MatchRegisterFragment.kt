@@ -1,6 +1,7 @@
 package com.example.sportsoft.Fragments
 
 import android.app.DatePickerDialog
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsoft.API.ApiModels.MatchInfo
+import com.example.sportsoft.API.ApiModels.MatchRequest
 import com.example.sportsoft.API.MatchHostnameVerifier
 import com.example.sportsoft.API.MatchInterceptor
 import com.example.sportsoft.API.ApiModels.MatchResponse
@@ -31,6 +33,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -43,6 +47,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     private lateinit var userToken: String
     private val PREFS_NAME = "SharedPreferences"
     private val USER_TOKEN = "Token"
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +55,13 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     ): View {
         _binding = MatchRegisterFragmentBinding.inflate(inflater, container, false)
 
+        val dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.getDefault())
+        val currentDate = LocalDate.now()
+        val formattedDate = dateFormat.format(currentDate)
+        val previousDate = currentDate.minusDays(7)
+        val formattedPreviousDate = previousDate.format(dateFormat)
+        binding.dateToEditText.text = formattedDate
+        binding.dateFromEditText.text = formattedPreviousDate
         return binding.root
     }
 
@@ -58,7 +70,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
+        sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
         userToken = sharedPreferences.getString(USER_TOKEN, "").toString()
 
         val interceptor = HttpLoggingInterceptor()
@@ -88,13 +100,13 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
             Toast.makeText(requireContext(), "Сортировка по дате", Toast.LENGTH_SHORT).show()
         }
 
-        teamSortConstraint.setOnClickListener {
+        /*teamSortConstraint.setOnClickListener {
             Toast.makeText(requireContext(), "Сортировка по тиме", Toast.LENGTH_SHORT).show()
         }
 
         scoreSortConstraint.setOnClickListener {
             Toast.makeText(requireContext(), "Сортировка по счёту", Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
         menuImageButton.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
@@ -102,7 +114,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
                     R.id.matchRegister -> {
-                        /*findNavController().navigate(R.id.)*/
                         true
                     }
                     R.id.exit -> {
@@ -156,6 +167,14 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
                 binding.dateFromEditText.text = formattedDate.format(selectedFromDate!!.time)
+                val interceptor = HttpLoggingInterceptor()
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+                val client = createOkHttpClient(interceptor, userToken)
+                val retrofit = createRetrofitInstance(client)
+                val apiService = retrofit.create(ApiService::class.java)
+                val request = MatchesModel(Server().getToken(), userToken, MatchRequest(binding.dateFromEditText.text.toString(), binding.dateToEditText.text.toString()))
+                val call = apiService.getMatches(request)
+                serverRequest(call)
             },
             currentDate.get(Calendar.YEAR),
             currentDate.get(Calendar.MONTH),
@@ -163,7 +182,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         )
 
         datePickerDialog.datePicker.maxDate = currentDate.timeInMillis
-
         datePickerDialog.show()
     }
 
@@ -188,11 +206,21 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
                 binding.dateToEditText.text = formattedDate.format(selectedToDate!!.time)
+
+                val interceptor = HttpLoggingInterceptor()
+                interceptor.level = HttpLoggingInterceptor.Level.BODY
+                val client = createOkHttpClient(interceptor, userToken)
+                val retrofit = createRetrofitInstance(client)
+                val apiService = retrofit.create(ApiService::class.java)
+                val request = MatchesModel(Server().getToken(), userToken, MatchRequest(binding.dateFromEditText.text.toString(), binding.dateToEditText.text.toString()))
+                val call = apiService.getMatches(request)
+                serverRequest(call)
             },
             currentDate.get(Calendar.YEAR),
             currentDate.get(Calendar.MONTH),
             currentDate.get(Calendar.DAY_OF_MONTH)
         )
+
 
         datePickerDialog.datePicker.maxDate = currentDate.timeInMillis
         selectedFromDate?.let {
@@ -233,7 +261,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                     val matchResponse = response.body()
                     if (matchResponse?.success == true) {
                         adapter.setList(matchResponse.matches ?: emptyList())
-                        //Toast.makeText(requireContext(), "Корректно получаются данные", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Даннные получены некорректно", Toast.LENGTH_SHORT).show()
                     }
