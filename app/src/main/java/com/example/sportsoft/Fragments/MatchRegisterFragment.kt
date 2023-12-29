@@ -45,7 +45,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     private var selectedFromDate: Calendar? = null
     private var selectedToDate: Calendar? = null
     private lateinit var userToken: String
-    private val PREFS_NAME = "SharedPreferences"
+    private val PREFS_NAME = "TokenSharedPreferences"
     private val USER_TOKEN = "Token"
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -54,14 +54,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         savedInstanceState: Bundle?
     ): View {
         _binding = MatchRegisterFragmentBinding.inflate(inflater, container, false)
-
-        val dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.getDefault())
-        val currentDate = LocalDate.now()
-        val formattedDate = dateFormat.format(currentDate)
-        val previousDate = currentDate.minusDays(7)
-        val formattedPreviousDate = previousDate.format(dateFormat)
-        binding.dateToEditText.text = formattedDate
-        binding.dateFromEditText.text = formattedPreviousDate
         return binding.root
     }
 
@@ -69,7 +61,13 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
-
+        val dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy", Locale.getDefault())
+        val currentDate = LocalDate.now()
+        val formattedDate = dateFormat.format(currentDate)
+        val previousDate = currentDate.minusDays(7)
+        val formattedPreviousDate = previousDate.format(dateFormat)
+        dateToEditText.text = formattedDate
+        dateFromEditText.text = formattedPreviousDate
         sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, 0)
         userToken = sharedPreferences.getString(USER_TOKEN, "").toString()
 
@@ -78,8 +76,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         val client = createOkHttpClient(interceptor, userToken)
         val retrofit = createRetrofitInstance(client)
         val apiService = retrofit.create(ApiService::class.java)
-        val request = MatchesModel(Server().getToken(), userToken)
-        val call = apiService.getMatches(request)
+        val call = apiService.getMatches()
         serverRequest(call)
 
 
@@ -148,7 +145,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
 
 
-    private fun showDatePickerFromDialog() {
+    private fun showDatePickerFromDialog() = with(binding) {
         val currentDate = Calendar.getInstance()
 
         val datePickerDialog = DatePickerDialog(
@@ -166,14 +163,13 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                 }
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                binding.dateFromEditText.text = formattedDate.format(selectedFromDate!!.time)
+                dateFromEditText.text = formattedDate.format(selectedFromDate!!.time)
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
                 val client = createOkHttpClient(interceptor, userToken)
                 val retrofit = createRetrofitInstance(client)
                 val apiService = retrofit.create(ApiService::class.java)
-                val request = MatchesModel(Server().getToken(), userToken, MatchRequest(binding.dateFromEditText.text.toString(), binding.dateToEditText.text.toString()))
-                val call = apiService.getMatches(request)
+                val call = apiService.getMatches(dateFromEditText.text.toString(), dateToEditText.text.toString())
                 serverRequest(call)
             },
             currentDate.get(Calendar.YEAR),
@@ -187,7 +183,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
 
 
-    private fun showDatePickerToDialog() {
+    private fun showDatePickerToDialog() = with(binding) {
         val currentDate = Calendar.getInstance()
 
         val datePickerDialog = DatePickerDialog(
@@ -205,28 +201,24 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                 }
 
                 val formattedDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                binding.dateToEditText.text = formattedDate.format(selectedToDate!!.time)
+                dateToEditText.text = formattedDate.format(selectedToDate!!.time)
 
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
                 val client = createOkHttpClient(interceptor, userToken)
                 val retrofit = createRetrofitInstance(client)
                 val apiService = retrofit.create(ApiService::class.java)
-                val request = MatchesModel(Server().getToken(), userToken, MatchRequest(binding.dateFromEditText.text.toString(), binding.dateToEditText.text.toString()))
-                val call = apiService.getMatches(request)
+                val call = apiService.getMatches(dateFromEditText.text.toString(), dateToEditText.text.toString())
                 serverRequest(call)
             },
             currentDate.get(Calendar.YEAR),
             currentDate.get(Calendar.MONTH),
             currentDate.get(Calendar.DAY_OF_MONTH)
         )
-
-
         datePickerDialog.datePicker.maxDate = currentDate.timeInMillis
         selectedFromDate?.let {
             datePickerDialog.datePicker.minDate = it.timeInMillis
         }
-
         datePickerDialog.show()
     }
 

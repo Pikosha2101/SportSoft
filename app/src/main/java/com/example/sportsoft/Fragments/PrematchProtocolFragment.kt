@@ -25,12 +25,13 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     private val firstTeamAdapter = TeamPlayersPrematchProtocolAdapter()
     private val secondTeamAdapter = TeamPlayersPrematchProtocolAdapter()
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = PrematchProtocolFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 

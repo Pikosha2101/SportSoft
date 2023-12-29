@@ -22,8 +22,16 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchInfo>) :
             dateTextView.text = matchModel.start_dt
             firstTeamNameTextView.text = matchModel.team1_shortname
             secondTeamNameTextView.text = matchModel.team2_shortname
-            firstTeamScoreTextView.text = matchModel.gf.toString()
-            secondTeamScoreTextView.text = matchModel.ga.toString()
+            if (matchModel.gf == null){
+                firstTeamScoreTextView.text = "-"
+            } else{
+                firstTeamScoreTextView.text = matchModel.gf.toString()
+            }
+            if (matchModel.ga == null){
+                secondTeamScoreTextView.text = "-"
+            } else {
+                secondTeamScoreTextView.text = matchModel.ga.toString()
+            }
             openMatchProgressCardView.setOnClickListener {
                 listener.onClickStart(matchModel)
             }

@@ -8,13 +8,19 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("api/login")
-    fun login(@Body request: LoginRequest): Call<LoginResponse>
+    fun login(): Call<LoginResponse>
 
     @Headers("Content-Type: application/json")
     @POST("api/match")
-    fun getMatches(@Body request: MatchesModel): Call<MatchResponse>
+    fun getMatches(@Query("MatchSearch[sinceDt]") test : String?, @Query("MatchSearch[toDt]") test1 : String?): Call<MatchResponse>
+
+
+    @Headers("Content-Type: application/json")
+    @POST("api/match")
+    fun getMatches(): Call<MatchResponse>
 }

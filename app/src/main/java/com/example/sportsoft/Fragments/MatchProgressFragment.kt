@@ -38,7 +38,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         savedInstanceState: Bundle?
     ): View {
         _binding = MatchProgressFragmentBinding.inflate(inflater, container, false)
-        handler = Handler(Looper.getMainLooper())
+        //handler = Handler(Looper.getMainLooper())
         return binding.root
     }
 
@@ -146,13 +146,15 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             handleButtonClick(eventTimeEditText, increment = false, 0)
         }
 
-        redCardSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+       /* redCardSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
-
+                eventTimeRedCardEditText.focusable = View.NOT_FOCUSABLE
+                eventTimeRedCardEditText.isClickable = false
             } else {
-
+                eventTimeRedCardEditText.focusable = View.FOCUSABLE
+                eventTimeRedCardEditText.isClickable = true
             }
-        }
+        }*/
 
         menuImageButton.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)

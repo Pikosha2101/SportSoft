@@ -25,7 +25,7 @@ import java.util.Base64
 class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
     private var _binding : AuthorizationFragmentBinding? = null
     private val binding get() = _binding!!
-    private val PREFS_NAME = "SharedPreferences"
+    private val PREFS_NAME = "TokenSharedPreferences"
     private val USER_TOKEN = "Token"
 
 
@@ -34,7 +34,6 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
         savedInstanceState: Bundle?
     ): View {
         _binding = AuthorizationFragmentBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -43,11 +42,12 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
         signinButton.setOnClickListener {
-            if(loginEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()){
+            /*if(loginEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()){
                 inputOperations()
             } else {
                 Toast.makeText(requireContext(), R.string.EnterAllDetails, Toast.LENGTH_SHORT).show()
-            }
+            }*/
+            inputOperations()
         }
     }
 
@@ -60,8 +60,10 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
 
 
     private fun inputOperations() = with(binding){
-        val username = loginEditText.text.toString()
-        val password = passwordEditText.text.toString()
+        /*val username = loginEditText.text.toString()
+        val password = passwordEditText.text.toString()*/
+        val username = "referee@rfl.ru"
+        val password = "1234567890"
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -69,8 +71,7 @@ class AuthorizationFragment : Fragment(R.layout.authorization_fragment) {
         val client = createOkHttpClient(interceptor, authData)
         val retrofit = createRetrofitInstance(client)
         val apiService = retrofit.create(ApiService::class.java)
-        val request = LoginRequest(Server().getToken(), authData)
-        val call = apiService.login(request)
+        val call = apiService.login()
         serverRequest(call)
     }
 
