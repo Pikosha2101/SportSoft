@@ -1,4 +1,4 @@
-package com.example.sportsoft.API
+package com.example.sportsoft.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

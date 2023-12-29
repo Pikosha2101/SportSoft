@@ -1,4 +1,4 @@
-package com.example.sportsoft.Models
+package com.example.sportsoft.models
 
 data class PlayerModel (
     val number: Int,

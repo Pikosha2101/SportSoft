@@ -1,4 +1,4 @@
-package com.example.sportsoft.Models
+package com.example.sportsoft.models
 
 import com.example.sportsoft.IParam
 

@@ -1,4 +1,4 @@
-package com.example.sportsoft.API.ApiModels
+package com.example.sportsoft.api.apiModels
 
 import com.example.sportsoft.IParam
 

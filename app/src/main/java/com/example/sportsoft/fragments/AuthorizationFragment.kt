@@ -1,4 +1,4 @@
-package com.example.sportsoft.Fragments
+package com.example.sportsoft.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.sportsoft.API.ApiService
-import com.example.sportsoft.API.ApiModels.LoginResponse
-import com.example.sportsoft.API.AuthInterceptor
-import com.example.sportsoft.API.Server
-import com.example.sportsoft.API.AuthHostnameVerifier
+import com.example.sportsoft.api.ApiService
+import com.example.sportsoft.api.apiModels.LoginResponse
+import com.example.sportsoft.api.AuthInterceptor
+import com.example.sportsoft.api.Server
+import com.example.sportsoft.api.AuthHostnameVerifier
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.AuthorizationFragmentBinding
 import okhttp3.OkHttpClient

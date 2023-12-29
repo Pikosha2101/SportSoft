@@ -1,4 +1,4 @@
-package com.example.sportsoft.API
+package com.example.sportsoft.api
 
 class Server {
     fun getServer(): String{

@@ -1,11 +1,11 @@
-package com.example.sportsoft.Adapters
+package com.example.sportsoft.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sportsoft.API.ApiModels.MatchInfo
+import com.example.sportsoft.api.apiModels.MatchInfo
 import com.example.sportsoft.Listener
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterRecyclerItemBinding

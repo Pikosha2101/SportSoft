@@ -1,4 +1,4 @@
-package com.example.sportsoft.Fragments
+package com.example.sportsoft.fragments
 
 import android.os.Bundle
 import android.view.Gravity

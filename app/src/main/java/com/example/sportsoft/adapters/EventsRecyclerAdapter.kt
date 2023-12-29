@@ -1,10 +1,10 @@
-package com.example.sportsoft.Adapters
+package com.example.sportsoft.adapters
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsoft.Listener
-import com.example.sportsoft.Models.EventModel
+import com.example.sportsoft.models.EventModel
 import com.example.sportsoft.databinding.GoalEventRecyclerviewItemBinding
 import com.example.sportsoft.databinding.RedCardEventRecyclerviewItemBinding
 import com.example.sportsoft.databinding.YellowCardEventRecyclerviewItemBinding

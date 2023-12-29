@@ -1,4 +1,4 @@
-package com.example.sportsoft.Fragments
+package com.example.sportsoft.fragments
 
 import android.os.Bundle
 import android.text.Editable
@@ -14,8 +14,8 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sportsoft.Adapters.TeamPlayersPrematchProtocolAdapter
-import com.example.sportsoft.Models.PlayerModel
+import com.example.sportsoft.adapters.TeamPlayersPrematchProtocolAdapter
+import com.example.sportsoft.models.PlayerModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.PrematchProtocolFragmentBinding
 

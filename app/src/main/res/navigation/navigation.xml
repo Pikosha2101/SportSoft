@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="com.example.sportsoft.Fragments.AuthorizationFragment"
+        android:name="com.example.sportsoft.fragments.AuthorizationFragment"
         android:label="AuthorizationFragment"
         tools:layout="@layout/authorization_fragment">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchRegisterFragment"
-        android:name="com.example.sportsoft.Fragments.MatchRegisterFragment"
+        android:name="com.example.sportsoft.fragments.MatchRegisterFragment"
         android:label="MatchRegisterFragment"
         tools:layout="@layout/match_register_fragment">
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/prematchProtocolFragment"
-        android:name="com.example.sportsoft.Fragments.PrematchProtocolFragment"
+        android:name="com.example.sportsoft.fragments.PrematchProtocolFragment"
         android:label="PrematchProtocolFragment"
         tools:layout="@layout/prematch_protocol_fragment">
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchProgressFragment"
-        android:name="com.example.sportsoft.Fragments.MatchProgressFragment"
+        android:name="com.example.sportsoft.fragments.MatchProgressFragment"
         android:label="MatchProgressFragment"
         tools:layout="@layout/match_progress_fragment">
         <action

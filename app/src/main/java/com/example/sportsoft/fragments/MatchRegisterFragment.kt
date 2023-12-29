@@ -1,4 +1,4 @@
-package com.example.sportsoft.Fragments
+package com.example.sportsoft.fragments
 
 import android.app.DatePickerDialog
 import android.content.SharedPreferences
@@ -13,13 +13,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sportsoft.API.ApiModels.MatchInfo
-import com.example.sportsoft.API.MatchHostnameVerifier
-import com.example.sportsoft.API.MatchInterceptor
-import com.example.sportsoft.API.ApiModels.MatchResponse
-import com.example.sportsoft.API.ApiService
-import com.example.sportsoft.API.Server
-import com.example.sportsoft.Adapters.MatchRecyclerAdapter
+import com.example.sportsoft.api.apiModels.MatchInfo
+import com.example.sportsoft.api.MatchHostnameVerifier
+import com.example.sportsoft.api.MatchInterceptor
+import com.example.sportsoft.api.apiModels.MatchResponse
+import com.example.sportsoft.api.ApiService
+import com.example.sportsoft.api.Server
+import com.example.sportsoft.adapters.MatchRecyclerAdapter
 import com.example.sportsoft.Listener
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.MatchRegisterFragmentBinding
