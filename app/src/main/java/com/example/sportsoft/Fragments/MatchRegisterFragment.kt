@@ -14,11 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsoft.API.ApiModels.MatchInfo
-import com.example.sportsoft.API.ApiModels.MatchRequest
 import com.example.sportsoft.API.MatchHostnameVerifier
 import com.example.sportsoft.API.MatchInterceptor
 import com.example.sportsoft.API.ApiModels.MatchResponse
-import com.example.sportsoft.API.ApiModels.MatchesModel
 import com.example.sportsoft.API.ApiService
 import com.example.sportsoft.API.Server
 import com.example.sportsoft.Adapters.MatchRecyclerAdapter

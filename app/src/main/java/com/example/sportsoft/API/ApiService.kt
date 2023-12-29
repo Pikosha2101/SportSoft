@@ -1,11 +1,8 @@
 package com.example.sportsoft.API
 
-import com.example.sportsoft.API.ApiModels.LoginRequest
 import com.example.sportsoft.API.ApiModels.LoginResponse
 import com.example.sportsoft.API.ApiModels.MatchResponse
-import com.example.sportsoft.API.ApiModels.MatchesModel
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query

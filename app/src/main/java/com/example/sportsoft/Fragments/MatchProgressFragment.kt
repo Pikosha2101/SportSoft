@@ -1,8 +1,6 @@
 package com.example.sportsoft.Fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -29,7 +27,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     private var secondsRemaining: Long = 0
 
     private lateinit var countUpTimer: CountUpTimer
-    private lateinit var handler: Handler
     private var eventsList = listOf("Гол", "Желтая карточка", "Красная карточка")
 
 
@@ -38,7 +35,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         savedInstanceState: Bundle?
     ): View {
         _binding = MatchProgressFragmentBinding.inflate(inflater, container, false)
-        //handler = Handler(Looper.getMainLooper())
         return binding.root
     }
 

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.API.ApiService
-import com.example.sportsoft.API.ApiModels.LoginRequest
 import com.example.sportsoft.API.ApiModels.LoginResponse
 import com.example.sportsoft.API.AuthInterceptor
 import com.example.sportsoft.API.Server
