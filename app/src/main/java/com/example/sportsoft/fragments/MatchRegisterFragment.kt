@@ -95,14 +95,6 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
             Toast.makeText(requireContext(), "Сортировка по дате", Toast.LENGTH_SHORT).show()
         }
 
-        /*teamSortConstraint.setOnClickListener {
-            Toast.makeText(requireContext(), "Сортировка по тиме", Toast.LENGTH_SHORT).show()
-        }
-
-        scoreSortConstraint.setOnClickListener {
-            Toast.makeText(requireContext(), "Сортировка по счёту", Toast.LENGTH_SHORT).show()
-        }*/
-
         menuImageButton.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
             popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
@@ -132,15 +124,53 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
 
 
     override fun onClickEdit(param: MatchInfo) {
-        findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment)
+        val bundle = createBundle(
+            param.team1_shortname,
+            param.team2_shortname,
+            param.gf,
+            param.ga,
+            param.active,
+            param.is_live
+        )
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_prematchProtocolFragment, bundle)
     }
 
 
 
     override fun onClickStart(param: MatchInfo) {
-        findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment)
+        val bundle = createBundle(
+            param.team1_shortname,
+            param.team2_shortname,
+            param.gf,
+            param.ga,
+            param.active,
+            param.is_live
+        )
+        findNavController().navigate(R.id.action_matchRegisterFragment_to_matchProgressFragment, bundle)
     }
 
+
+    private fun createBundle(
+        team1name: String,
+        team2name: String,
+        team1goals: Int?,
+        team2goals: Int?,
+        active: Boolean,
+        isLive: Int
+    ): Bundle {
+        val bundle = Bundle()
+        bundle.putString("team1name", team1name)
+        bundle.putString("team2name", team2name)
+        if (team1goals != null) {
+            bundle.putInt("team1goals", team1goals)
+        }
+        if (team2goals != null) {
+            bundle.putInt("team2goals", team2goals)
+        }
+        bundle.putBoolean("active", active)
+        bundle.putInt("isLive", isLive)
+        return bundle
+    }
 
 
     private fun showDatePickerFromDialog() = with(binding) {

@@ -48,4 +48,6 @@
     <string name="EnterAllDetails">Enter all details</string>
     <string name="NetworkError">Network error</string>
     <string name="TheRequestFailed">The request failed</string>
+    <string name="PlayerMatch">Player of the match %s</string>
+    <string name="TeamСomposition">Team composition of %s</string>
 </resources>

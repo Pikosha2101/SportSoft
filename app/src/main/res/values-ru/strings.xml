@@ -49,4 +49,6 @@
     <string name="EnterAllDetails">Введите все данные</string>
     <string name="NetworkError">Ошибка сети</string>
     <string name="TheRequestFailed">Ошибка запроса</string>
+    <string name="PlayerMatch">Игрок матча %s</string>
+    <string name="TeamСomposition">Состав команды %s</string>
 </resources>

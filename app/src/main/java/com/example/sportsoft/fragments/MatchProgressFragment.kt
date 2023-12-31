@@ -17,6 +17,7 @@ import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
+import kotlin.properties.Delegates
 
 class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     private var _binding: MatchProgressFragmentBinding? = null
@@ -25,7 +26,12 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     private var isTimerRunning = false
     private var isTimerPaused = false
     private var secondsRemaining: Long = 0
-
+    private lateinit var firstTeamName: String
+    private lateinit var secondTeamName: String
+    private var firstTeamGoals: Int? = null
+    private var secondTeamGoals: Int? = null
+    private var matchActive by Delegates.notNull<Boolean>()
+    private var matchIsLive by Delegates.notNull<Int>()
     private lateinit var countUpTimer: CountUpTimer
     private var eventsList = listOf("Гол", "Желтая карточка", "Красная карточка")
 
@@ -35,6 +41,12 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         savedInstanceState: Bundle?
     ): View {
         _binding = MatchProgressFragmentBinding.inflate(inflater, container, false)
+        firstTeamName = arguments?.getString("team1name")!!
+        secondTeamName = arguments?.getString("team2name")!!
+        firstTeamGoals = arguments?.getInt("team1goals")
+        secondTeamGoals = arguments?.getInt("team2goals")
+        matchActive = arguments?.getBoolean("active")!!
+        matchIsLive = arguments?.getInt("isLive")!!
         return binding.root
     }
 
@@ -42,7 +54,14 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-
+        firstTeamNameEditText.setText(firstTeamName)
+        secondTeamNameEditText.setText(secondTeamName)
+        firstTeamScoreTextView.text = firstTeamGoals.toString()
+        secondTeamScoreTextView.text = secondTeamGoals.toString()
+        firstTeamFirstTimeFoulsTextView.text = firstTeamName
+        secondTeamFirstTimeFoulsTextView.text = secondTeamName
+        firstTeamSecondTimeFoulsTextView.text = firstTeamName
+        secondTeamSecondTimeFoulsTextView.text = secondTeamName
         startCardView.setOnClickListener {
             if (!isTimerRunning && !isTimerPaused) {
                 startTimer()

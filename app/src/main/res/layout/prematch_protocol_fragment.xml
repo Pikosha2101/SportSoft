@@ -91,7 +91,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/textView6"
+                    android:id="@+id/firstTeamNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
@@ -113,10 +113,10 @@
                     android:text="@string/AwayTeam"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/firstTeamNameEditText" />
 
                 <EditText
-                    android:id="@+id/textView8"
+                    android:id="@+id/secondTeamNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/border"
@@ -136,7 +136,7 @@
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
+                    app:layout_constraintTop_toBottomOf="@+id/secondTeamNameEditText">
 
                     <TextView
                         android:id="@+id/textView11"
@@ -329,7 +329,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/firstTeamPlayerTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Игрок матча ФК Локомотив"
@@ -342,7 +342,7 @@
                         android:layout_height="40dp"
                         android:background="@drawable/custom_spinner_style"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                        app:layout_constraintTop_toBottomOf="@+id/firstTeamPlayerTextView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -355,7 +355,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/secondTeamPlayerTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Игрок матча ФК Крылья советов"
@@ -370,7 +370,7 @@
                         android:autofillHints="Выберите игрока комманды"
                         android:background="@drawable/custom_spinner_style"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                        app:layout_constraintTop_toBottomOf="@+id/secondTeamPlayerTextView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
@@ -656,7 +656,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/FirstTeamCompositionTextView"
+                                android:id="@+id/firstTeamCompositionTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Состав команды ФК Локомотив"
@@ -683,7 +683,7 @@
                                 android:background="@color/separator"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/FirstTeamCompositionTextView" />
+                                app:layout_constraintTop_toBottomOf="@+id/firstTeamCompositionTextView" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout

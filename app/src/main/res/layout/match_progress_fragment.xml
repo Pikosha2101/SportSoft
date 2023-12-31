@@ -92,7 +92,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/textView6"
+                    android:id="@+id/firstTeamNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
@@ -115,10 +115,10 @@
                     android:text="@string/AwayTeam"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/firstTeamNameEditText" />
 
                 <EditText
-                    android:id="@+id/textView8"
+                    android:id="@+id/secondTeamNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
+                    app:layout_constraintTop_toBottomOf="@+id/secondTeamNameEditText">
 
                     <TextView
                         android:id="@+id/textView11"
@@ -575,7 +575,7 @@
                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/textView14"
+                                android:id="@+id/firstTeamFirstTimeFoulsTextView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -607,7 +607,7 @@
                                 android:backgroundTint="@color/white"
                                 android:layout_marginTop="8dp"
                                 app:layout_constraintStart_toEndOf="@+id/firstTeamFoulsCountMinusFirstTimeImageButton"
-                                app:layout_constraintTop_toBottomOf="@+id/textView14">
+                                app:layout_constraintTop_toBottomOf="@+id/firstTeamFirstTimeFoulsTextView">
 
                                 <TextView
                                     android:id="@+id/firstTeamFoulsCountFirstTimeTextView"
@@ -635,7 +635,7 @@
                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/textView16"
+                                android:id="@+id/secondTeamFirstTimeFoulsTextView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -667,7 +667,7 @@
                                 android:backgroundTint="@color/white"
                                 android:layout_marginTop="8dp"
                                 app:layout_constraintStart_toEndOf="@+id/secondTeamFoulsCountMinusFirstTimeImageButton"
-                                app:layout_constraintTop_toBottomOf="@+id/textView16">
+                                app:layout_constraintTop_toBottomOf="@+id/secondTeamFirstTimeFoulsTextView">
 
                                 <TextView
                                     android:id="@+id/secondTeamFoulsCountFirstTimeTextView"
@@ -741,7 +741,7 @@
                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/textView18"
+                                android:id="@+id/firstTeamSecondTimeFoulsTextView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
@@ -773,7 +773,7 @@
                                 android:backgroundTint="@color/white"
                                 android:layout_marginTop="8dp"
                                 app:layout_constraintStart_toEndOf="@+id/firstTeamFoulsCountMinusSecondTimeImageButton"
-                                app:layout_constraintTop_toBottomOf="@+id/textView18">
+                                app:layout_constraintTop_toBottomOf="@+id/firstTeamSecondTimeFoulsTextView">
 
                                 <TextView
                                     android:id="@+id/firstTeamFoulsCountSecondTimeTextView"
@@ -801,7 +801,7 @@
                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/textView19"
+                                android:id="@+id/secondTeamSecondTimeFoulsTextView"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -833,7 +833,7 @@
                                 android:backgroundTint="@color/white"
                                 android:layout_marginTop="8dp"
                                 app:layout_constraintStart_toEndOf="@+id/secondTeamFoulsCountMinusSecondTimeImageButton"
-                                app:layout_constraintTop_toBottomOf="@+id/textView19">
+                                app:layout_constraintTop_toBottomOf="@+id/secondTeamSecondTimeFoulsTextView">
 
                                 <TextView
                                     android:id="@+id/secondTeamFoulsCountSecondTimeTextView"

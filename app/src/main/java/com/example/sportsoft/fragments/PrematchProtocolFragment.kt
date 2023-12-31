@@ -18,20 +18,32 @@ import com.example.sportsoft.adapters.TeamPlayersPrematchProtocolAdapter
 import com.example.sportsoft.models.PlayerModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.PrematchProtocolFragmentBinding
+import kotlin.properties.Delegates
 
 class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     private var _binding : PrematchProtocolFragmentBinding? = null
     private val binding get() = _binding!!
     private val firstTeamAdapter = TeamPlayersPrematchProtocolAdapter()
     private val secondTeamAdapter = TeamPlayersPrematchProtocolAdapter()
-
-
+    private lateinit var firstTeamName: String
+    private lateinit var secondTeamName: String
+    private var firstTeamGoals: Int? = null
+    private var secondTeamGoals: Int? = null
+    private var matchActive by Delegates.notNull<Boolean>()
+    private var matchIsLive by Delegates.notNull<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = PrematchProtocolFragmentBinding.inflate(inflater, container, false)
+        firstTeamName = arguments?.getString("team1name")!!
+        secondTeamName = arguments?.getString("team2name")!!
+        firstTeamGoals = arguments?.getInt("team1goals")
+        secondTeamGoals = arguments?.getInt("team2goals")
+        matchActive = arguments?.getBoolean("active")!!
+        matchIsLive = arguments?.getInt("isLive")!!
+
         return binding.root
     }
 
@@ -40,6 +52,14 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
 
+        firstTeamNameEditText.setText(firstTeamName)
+        secondTeamNameEditText.setText(secondTeamName)
+        firstTeamScoreTextView.setText(firstTeamGoals.toString())
+        secondTeamScoreTextView.setText(secondTeamGoals.toString())
+        firstTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, firstTeamName)
+        secondTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, secondTeamName)
+        firstTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, firstTeamName)
+        secondTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, secondTeamName)
         refereesMatchConstraintLayout.setOnClickListener {
             if (hiddenRefereesConstraintLayout.visibility == View.VISIBLE) {
                 TransitionManager.beginDelayedTransition(baseCardview, AutoTransition())
@@ -129,7 +149,15 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
 
 
         saveAndStartButton.setOnClickListener {
-            findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchProgressFragment)
+            val bundle = createBundle(
+                firstTeamName,
+                secondTeamName,
+                firstTeamGoals,
+                secondTeamGoals,
+                matchActive,
+                matchIsLive
+            )
+            findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchProgressFragment, bundle)
         }
 
         saveAllButton.setOnClickListener {
@@ -373,6 +401,30 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         val refereePositionSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, refereePositionList)
         refereePositionSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
         refereePositionSpinner.adapter = refereePositionSpinnerAdapter
+    }
+
+
+
+    private fun createBundle(
+        team1name: String,
+        team2name: String,
+        team1goals: Int?,
+        team2goals: Int?,
+        active: Boolean,
+        isLive: Int
+    ): Bundle {
+        val bundle = Bundle()
+        bundle.putString("team1name", team1name)
+        bundle.putString("team2name", team2name)
+        if (team1goals != null) {
+            bundle.putInt("team1goals", team1goals)
+        }
+        if (team2goals != null) {
+            bundle.putInt("team2goals", team2goals)
+        }
+        bundle.putBoolean("active", active)
+        bundle.putInt("isLive", isLive)
+        return bundle
     }
 
 
