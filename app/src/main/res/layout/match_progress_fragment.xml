@@ -963,22 +963,25 @@
 
                                     <EditText
                                         android:id="@+id/eventTimeGoalEditText"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="40dp"
-                                        android:layout_marginEnd="16dp"
                                         android:layout_marginBottom="-4dp"
-                                        android:backgroundTint="@color/transparent"
+                                        android:background="@color/border"
+                                        android:enabled="false"
                                         android:gravity="center"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:maxLines="1"
                                         android:textSize="16sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+                                        app:layout_constraintHorizontal_bias="0.0"
                                         app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent" />
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.0" />
 
                                     <LinearLayout
+                                        android:id="@+id/linearLayout6"
                                         android:layout_width="wrap_content"
                                         android:layout_height="40dp"
                                         android:orientation="vertical"
@@ -990,8 +993,8 @@
                                             android:id="@+id/eventTimeGoalPlusImageButton"
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
+                                            android:background="@color/border2"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
@@ -999,7 +1002,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:background="@color/border2"
                                             android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1015,6 +1018,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="20dp"
                                     android:layout_weight="1"
+                                    android:checked="true"
                                     android:thumb="@drawable/switch_thumb_custom_style"
                                     android:track="@drawable/switch_track_custom_style"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1187,21 +1191,22 @@
 
                                     <EditText
                                         android:id="@+id/eventTimeEditText"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="40dp"
-                                        android:layout_marginEnd="16dp"
-                                        android:backgroundTint="@color/transparent"
+                                        android:background="@color/border"
+                                        android:enabled="false"
                                         android:gravity="center"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:maxLines="1"
                                         android:textSize="16sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/yellowCardTimeLinearLayout"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent" />
 
                                     <LinearLayout
+                                        android:id="@+id/yellowCardTimeLinearLayout"
                                         android:layout_width="wrap_content"
                                         android:layout_height="40dp"
                                         android:orientation="vertical"
@@ -1214,7 +1219,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:background="@color/border2"
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
@@ -1222,7 +1227,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:background="@color/border2"
                                             android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1238,6 +1243,7 @@
                                     android:layout_width="50dp"
                                     android:layout_height="20dp"
                                     android:layout_weight="1"
+                                    android:checked="true"
                                     android:thumb="@drawable/switch_thumb_custom_style"
                                     android:track="@drawable/switch_track_custom_style"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1352,7 +1358,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/redCardPlayerTextVeiw"
+                            android:id="@+id/redCardPlayerTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
@@ -1367,7 +1373,7 @@
                             android:background="@drawable/custom_spinner_style"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/redCardPlayerTextVeiw" />
+                            app:layout_constraintTop_toBottomOf="@+id/redCardPlayerTextView" />
 
 
                         <TextView
@@ -1408,12 +1414,13 @@
                                         android:id="@+id/eventTimeRedCardEditText"
                                         android:layout_width="0dp"
                                         android:layout_height="40dp"
-                                        android:backgroundTint="@color/transparent"
+                                        android:background="@color/border"
                                         android:gravity="center"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:maxLines="1"
                                         android:textSize="16sp"
+                                        android:enabled="false"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintEnd_toStartOf="@+id/redCardMinuteLinearLayout"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -1433,7 +1440,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:focusable="false"
+                                            android:clickable="false"
+                                            android:background="@color/border2"
                                             android:src="@drawable/arrow_up_icon" />
 
                                         <ImageButton
@@ -1441,7 +1450,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@color/transparent"
+                                            android:focusable="false"
+                                            android:clickable="false"
+                                            android:background="@color/border2"
                                             android:src="@drawable/arrow_down_icon" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -161,15 +161,44 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             handleButtonClick(eventTimeEditText, increment = false, 0)
         }
 
-       /* redCardSwitch.setOnCheckedChangeListener { _, isChecked ->
+        redCardSwitch.setOnCheckedChangeListener { _, isChecked ->
+            eventTimeRedCardEditText.isEnabled = !isChecked
             if (isChecked){
-                eventTimeRedCardEditText.focusable = View.NOT_FOCUSABLE
-                eventTimeRedCardEditText.isClickable = false
+                eventTimeRedCardPlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeRedCardMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeRedCardEditText.setBackgroundColor(resources.getColor(R.color.border))
             } else {
-                eventTimeRedCardEditText.focusable = View.FOCUSABLE
-                eventTimeRedCardEditText.isClickable = true
+                eventTimeRedCardPlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeRedCardMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeRedCardEditText.setBackgroundColor(resources.getColor(R.color.transparent))
             }
-        }*/
+        }
+
+        goalSwitch.setOnCheckedChangeListener{_, isChecked ->
+            eventTimeGoalEditText.isEnabled = !isChecked
+            if (isChecked){
+                eventTimeGoalPlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeGoalMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeGoalEditText.setBackgroundColor(resources.getColor(R.color.border))
+            } else {
+                eventTimeGoalPlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeGoalMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeGoalEditText.setBackgroundColor(resources.getColor(R.color.transparent))
+            }
+        }
+
+        yellowCardSwitch.setOnCheckedChangeListener { _, isChecked ->
+            eventTimeEditText.isEnabled = !isChecked
+            if (isChecked){
+                eventTimePlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
+                eventTimeEditText.setBackgroundColor(resources.getColor(R.color.border))
+            } else {
+                eventTimePlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeEditText.setBackgroundColor(resources.getColor(R.color.transparent))
+            }
+        }
 
         menuImageButton.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
@@ -204,10 +233,17 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
                     "Гол" -> {
                         goalHiddenConstraintLayout.visibility = View.VISIBLE
                         yellowCardHiddenConstraintLayout.visibility = View.GONE
+                        redCardHiddenConstraintLayout.visibility = View.GONE
                     }
                     "Желтая карточка" -> {
                         goalHiddenConstraintLayout.visibility = View.GONE
                         yellowCardHiddenConstraintLayout.visibility = View.VISIBLE
+                        redCardHiddenConstraintLayout.visibility = View.GONE
+                    }
+                    "Красная карточка" -> {
+                        goalHiddenConstraintLayout.visibility = View.GONE
+                        yellowCardHiddenConstraintLayout.visibility = View.GONE
+                        redCardHiddenConstraintLayout.visibility = View.VISIBLE
                     }
                 }
             }

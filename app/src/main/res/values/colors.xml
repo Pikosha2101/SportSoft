@@ -8,4 +8,5 @@
     <color name="separator">#B8CAD5</color>
     <color name="blue">#0078D2</color>
     <color name="unavailableText">#AFBBC3</color>
+    <color name="border2">#DCE5EA</color>
 </resources>
