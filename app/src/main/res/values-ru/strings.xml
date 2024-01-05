@@ -51,4 +51,7 @@
     <string name="TheRequestFailed">Ошибка запроса</string>
     <string name="PlayerMatch">Игрок матча %s</string>
     <string name="TeamСomposition">Состав команды %s</string>
+    <string name="DataSuccessfullySaved">Данные протокола успешно сохранены</string>
+    <string name="TheMatchIsCompleted">Матч завершен, данные успешно сохранены в протоколе</string>
+    <string name="ToTheListOfMatches">К списку матчей</string>
 </resources>

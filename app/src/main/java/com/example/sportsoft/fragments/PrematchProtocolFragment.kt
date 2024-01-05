@@ -1,5 +1,7 @@
 package com.example.sportsoft.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.transition.AutoTransition
@@ -10,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.FrameLayout
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -18,6 +21,8 @@ import com.example.sportsoft.adapters.TeamPlayersPrematchProtocolAdapter
 import com.example.sportsoft.models.PlayerModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.PrematchProtocolFragmentBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 import kotlin.properties.Delegates
 
 class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
@@ -32,6 +37,9 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     private var matchActive by Delegates.notNull<Boolean>()
     private var matchIsLive by Delegates.notNull<Int>()
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,11 +52,17 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         matchActive = arguments?.getBoolean("active")!!
         matchIsLive = arguments?.getInt("isLive")!!
 
+
+
+
+
         return binding.root
     }
 
 
 
+
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
         super.onViewCreated(view, savedInstanceState)
 
@@ -161,7 +175,20 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         }
 
         saveAllButton.setOnClickListener {
-            findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
+            //findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
+            val customView = layoutInflater.inflate(
+                R.layout.prematch_protocol_snackbar_layout,
+                null
+            )
+            val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+            snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+            val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            snackBar.view.layoutParams = params
+            val snackBarLayout = snackBar.view as SnackbarLayout
+            snackBarLayout.addView(customView, 0)
+            snackBar.show()
         }
 
         firstTeamAdapter.setList(

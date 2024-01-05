@@ -50,4 +50,7 @@
     <string name="TheRequestFailed">The request failed</string>
     <string name="PlayerMatch">Player of the match %s</string>
     <string name="TeamСomposition">Team composition of %s</string>
+    <string name="DataSuccessfullySaved">Protocol data successfully saved</string>
+    <string name="TheMatchIsCompleted">The match is completed, the data is successfully saved in the protocol</string>
+    <string name="ToTheListOfMatches">To the list of matches</string>
 </resources>

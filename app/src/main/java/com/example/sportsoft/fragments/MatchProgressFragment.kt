@@ -1,5 +1,7 @@
 package com.example.sportsoft.fragments
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -8,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -17,6 +21,7 @@ import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
 class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
@@ -52,6 +57,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
 
+    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         firstTeamNameEditText.setText(firstTeamName)
@@ -118,7 +124,25 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
         finishCardView.setOnClickListener {
-            findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+            val customView = layoutInflater.inflate(
+                R.layout.match_progress_end_snackbar,
+                null
+            )
+            val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+            snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+            val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+            params.gravity = Gravity.TOP
+            snackBar.view.layoutParams = params
+            val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+
+            val button: Button = customView!!.findViewById(R.id.button)
+            button.setOnClickListener {
+                findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+            }
+            snackBarLayout.addView(customView, 0)
+            snackBar.show()
+
         }
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
