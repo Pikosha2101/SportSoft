@@ -54,4 +54,5 @@
     <string name="DataSuccessfullySaved">Данные протокола успешно сохранены</string>
     <string name="TheMatchIsCompleted">Матч завершен, данные успешно сохранены в протоколе</string>
     <string name="ToTheListOfMatches">К списку матчей</string>
+    <string name="LiveExitSnackBarText">Для выхода из Live режима остановите таймер или завершите матч</string>
 </resources>

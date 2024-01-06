@@ -53,4 +53,5 @@
     <string name="DataSuccessfullySaved">Protocol data successfully saved</string>
     <string name="TheMatchIsCompleted">The match is completed, the data is successfully saved in the protocol</string>
     <string name="ToTheListOfMatches">To the list of matches</string>
+    <string name="LiveExitSnackBarText">To exit Live mode, stop the timer or end the match</string>
 </resources>

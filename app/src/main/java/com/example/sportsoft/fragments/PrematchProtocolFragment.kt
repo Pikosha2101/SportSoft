@@ -52,10 +52,6 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         matchActive = arguments?.getBoolean("active")!!
         matchIsLive = arguments?.getInt("isLive")!!
 
-
-
-
-
         return binding.root
     }
 

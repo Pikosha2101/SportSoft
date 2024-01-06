@@ -16,11 +16,13 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
+import com.example.sportsoft.viewModels.MatchProgressViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
@@ -28,8 +30,8 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     private var _binding: MatchProgressFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: MatchProgressViewModel
     private var isTimerRunning = false
-    private var isTimerPaused = false
     private var secondsRemaining: Long = 0
     private lateinit var firstTeamName: String
     private lateinit var secondTeamName: String
@@ -52,6 +54,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         secondTeamGoals = arguments?.getInt("team2goals")
         matchActive = arguments?.getBoolean("active")!!
         matchIsLive = arguments?.getInt("isLive")!!
+        viewModel = ViewModelProvider(this)[MatchProgressViewModel::class.java]
         return binding.root
     }
 
@@ -68,62 +71,19 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         secondTeamFirstTimeFoulsTextView.text = secondTeamName
         firstTeamSecondTimeFoulsTextView.text = firstTeamName
         secondTeamSecondTimeFoulsTextView.text = secondTeamName
+
         startCardView.setOnClickListener {
-            if (!isTimerRunning && !isTimerPaused) {
+            if (!isTimerRunning) {
                 startTimer()
-            } else if (isTimerPaused) {
-                resumeTimer()
             }
-
-            startCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-            startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
-            startImageView.setImageResource(R.drawable.arrow_start_icon_unavailable)
-
-            pauseConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-            pauseCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-            pauseButtonImageView.setImageResource(R.drawable.pause_availabe_icon)
-            pauseTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-
-            stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-            stopCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-            stopTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            stopButtonImageView.setImageResource(R.drawable.stop_available_icon)
         }
 
         stopCardView.setOnClickListener {
             stopTimer()
-            startCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-            startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-            startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            startImageView.setImageResource(R.drawable.arrow_start_icon)
-
-            stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            stopCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-            stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
-            stopButtonImageView.setImageResource(R.drawable.stop_unavailable_icon)
-
-            pauseConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            pauseCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-            pauseButtonImageView.setImageResource(R.drawable.pause_unavailabe_icon)
-            pauseTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
         }
-
-        pauseCardView.setOnClickListener {
-            pauseTimer()
-            startCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-            startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-            startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            startImageView.setImageResource(R.drawable.arrow_start_icon)
-
-            pauseConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            pauseCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-            pauseButtonImageView.setImageResource(R.drawable.pause_unavailabe_icon)
-            pauseTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
-        }
-
 
         finishCardView.setOnClickListener {
+            stopTimer()
             val customView = layoutInflater.inflate(
                 R.layout.match_progress_end_snackbar,
                 null
@@ -142,8 +102,30 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
             snackBarLayout.addView(customView, 0)
             snackBar.show()
-
         }
+
+        leaveCardView.setOnClickListener {
+            if(isTimerRunning) {
+                val customView = layoutInflater.inflate(
+                    R.layout.exit_live_snackbar_layout,
+                    null
+                )
+                val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+                snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+                val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+                params.gravity = Gravity.TOP
+                snackBar.view.layoutParams = params
+                val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+
+                snackBarLayout.addView(customView, 0)
+                snackBar.show()
+            } else {
+                findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+            }
+        }
+
+
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
             handleButtonClick(firstTeamFoulsCountFirstTimeTextView, increment = false, 0)
@@ -188,39 +170,39 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         redCardSwitch.setOnCheckedChangeListener { _, isChecked ->
             eventTimeRedCardEditText.isEnabled = !isChecked
             if (isChecked){
-                eventTimeRedCardPlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeRedCardMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeRedCardEditText.setBackgroundColor(resources.getColor(R.color.border))
+                eventTimeRedCardPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeRedCardMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeRedCardEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
             } else {
-                eventTimeRedCardPlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeRedCardMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeRedCardEditText.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeRedCardPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeRedCardMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeRedCardEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
             }
         }
 
         goalSwitch.setOnCheckedChangeListener{_, isChecked ->
             eventTimeGoalEditText.isEnabled = !isChecked
             if (isChecked){
-                eventTimeGoalPlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeGoalMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeGoalEditText.setBackgroundColor(resources.getColor(R.color.border))
+                eventTimeGoalPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeGoalMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeGoalEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
             } else {
-                eventTimeGoalPlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeGoalMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeGoalEditText.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimeGoalPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeGoalMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeGoalEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
             }
         }
 
         yellowCardSwitch.setOnCheckedChangeListener { _, isChecked ->
             eventTimeEditText.isEnabled = !isChecked
             if (isChecked){
-                eventTimePlusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeMinusImageButton.setBackgroundColor(resources.getColor(R.color.border2))
-                eventTimeEditText.setBackgroundColor(resources.getColor(R.color.border))
+                eventTimePlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
+                eventTimeEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
             } else {
-                eventTimePlusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeMinusImageButton.setBackgroundColor(resources.getColor(R.color.transparent))
-                eventTimeEditText.setBackgroundColor(resources.getColor(R.color.transparent))
+                eventTimePlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
+                eventTimeEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
             }
         }
 
@@ -242,7 +224,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
             popupMenu.show()
         }
-
 
 
 
@@ -280,7 +261,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
 
-    private fun startTimer() {
+    private fun startTimer() = with(binding) {
         if (!isTimerRunning) {
             countUpTimer = object : CountUpTimer(1000) {
                 override fun onCountUpTick(elapsedTime: Long) {
@@ -291,40 +272,36 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         }
         countUpTimer.startTimer()
         isTimerRunning = true
-        isTimerPaused = false
+
+        startCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
+        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        startImageView.setImageResource(R.drawable.arrow_start_icon_unavailable)
+
+        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
+        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
+        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        stopButtonImageView.setImageResource(R.drawable.stop_available_icon)
     }
 
 
 
-    private fun resumeTimer() {
-        if (isTimerPaused) {
-            countUpTimer.startTimer()
-            isTimerRunning = true
-            isTimerPaused = false
-        }
-    }
-
-
-
-    private fun stopTimer() {
-        if (isTimerRunning || isTimerPaused) {
-            countUpTimer.cancel()
-            isTimerRunning = false
-            isTimerPaused = false
-            secondsRemaining = 0
-            updateTimerText()
-        }
-    }
-
-
-
-    private fun pauseTimer() {
+    private fun stopTimer() = with(binding) {
         if (isTimerRunning) {
             countUpTimer.cancel()
             isTimerRunning = false
-            isTimerPaused = true
+            secondsRemaining = 0
             updateTimerText()
         }
+        startCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
+        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
+        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        startImageView.setImageResource(R.drawable.arrow_start_icon)
+
+        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
+        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        stopButtonImageView.setImageResource(R.drawable.stop_unavailable_icon)
     }
 
 
