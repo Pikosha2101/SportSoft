@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.PopupMenu
+import android.widget.Switch
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -60,7 +62,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
 
-    @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
         firstTeamNameEditText.setText(firstTeamName)
@@ -72,60 +73,34 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
         firstTeamSecondTimeFoulsTextView.text = firstTeamName
         secondTeamSecondTimeFoulsTextView.text = secondTeamName
 
+        viewModel.currentTime.observe(viewLifecycleOwner) { currentTime ->
+            binding.timerTextView.text = currentTime
+        }
+
         startCardView.setOnClickListener {
-            if (!isTimerRunning) {
-                startTimer()
+            if (viewModel.isTimerRunning.value != true) {
+                viewModel.startTimer()
             }
+            updateTimerStyleStart()
         }
 
         stopCardView.setOnClickListener {
-            stopTimer()
+            viewModel.stopTimer()
+            updateTimerStyleStop()
         }
 
         finishCardView.setOnClickListener {
-            stopTimer()
-            val customView = layoutInflater.inflate(
-                R.layout.match_progress_end_snackbar,
-                null
-            )
-            val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
-            snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-
-            val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
-            params.gravity = Gravity.TOP
-            snackBar.view.layoutParams = params
-            val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
-
-            val button: Button = customView!!.findViewById(R.id.button)
-            button.setOnClickListener {
-                findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
-            }
-            snackBarLayout.addView(customView, 0)
-            snackBar.show()
+            viewModel.stopTimer()
+            endMatchSnackBarShow()
         }
 
         leaveCardView.setOnClickListener {
             if(isTimerRunning) {
-                val customView = layoutInflater.inflate(
-                    R.layout.exit_live_snackbar_layout,
-                    null
-                )
-                val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
-                snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-
-                val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
-                params.gravity = Gravity.TOP
-                snackBar.view.layoutParams = params
-                val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
-
-                snackBarLayout.addView(customView, 0)
-                snackBar.show()
+                exitLiveSnackBarShow()
             } else {
                 findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
             }
         }
-
-
 
         firstTeamFoulsCountMinusFirstTimeImageButton.setOnClickListener {
             handleButtonClick(firstTeamFoulsCountFirstTimeTextView, increment = false, 0)
@@ -167,65 +142,13 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             handleButtonClick(eventTimeEditText, increment = false, 0)
         }
 
-        redCardSwitch.setOnCheckedChangeListener { _, isChecked ->
-            eventTimeRedCardEditText.isEnabled = !isChecked
-            if (isChecked){
-                eventTimeRedCardPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeRedCardMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeRedCardEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
-            } else {
-                eventTimeRedCardPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeRedCardMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeRedCardEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-            }
+        setupSwitchToggle(redCardSwitch, eventTimeRedCardEditText, eventTimeRedCardPlusImageButton, eventTimeRedCardMinusImageButton)
+        setupSwitchToggle(goalSwitch, eventTimeGoalEditText, eventTimeGoalPlusImageButton, eventTimeGoalMinusImageButton)
+        setupSwitchToggle(yellowCardSwitch, eventTimeEditText, eventTimePlusImageButton, eventTimeMinusImageButton)
+
+        menuImageButton.setOnClickListener { view ->
+            popupMenuShow(view)
         }
-
-        goalSwitch.setOnCheckedChangeListener{_, isChecked ->
-            eventTimeGoalEditText.isEnabled = !isChecked
-            if (isChecked){
-                eventTimeGoalPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeGoalMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeGoalEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
-            } else {
-                eventTimeGoalPlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeGoalMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeGoalEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-            }
-        }
-
-        yellowCardSwitch.setOnCheckedChangeListener { _, isChecked ->
-            eventTimeEditText.isEnabled = !isChecked
-            if (isChecked){
-                eventTimePlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border2))
-                eventTimeEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
-            } else {
-                eventTimePlusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeMinusImageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-                eventTimeEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
-            }
-        }
-
-        menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
-            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-                when (item.itemId) {
-                    R.id.matchRegister -> {
-                        findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
-                        true
-                    }
-                    R.id.exit -> {
-                        findNavController().navigate(R.id.action_matchProgressFragment_to_authorizationFragment)
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popupMenu.show()
-        }
-
-
 
         val eventSpinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, eventsList)
         eventSpinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
@@ -261,60 +184,6 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
 
 
-    private fun startTimer() = with(binding) {
-        if (!isTimerRunning) {
-            countUpTimer = object : CountUpTimer(1000) {
-                override fun onCountUpTick(elapsedTime: Long) {
-                    secondsRemaining = elapsedTime / 1000
-                    updateTimerText()
-                }
-            }
-        }
-        countUpTimer.startTimer()
-        isTimerRunning = true
-
-        startCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
-        startImageView.setImageResource(R.drawable.arrow_start_icon_unavailable)
-
-        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        stopButtonImageView.setImageResource(R.drawable.stop_available_icon)
-    }
-
-
-
-    private fun stopTimer() = with(binding) {
-        if (isTimerRunning) {
-            countUpTimer.cancel()
-            isTimerRunning = false
-            secondsRemaining = 0
-            updateTimerText()
-        }
-        startCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
-        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
-        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        startImageView.setImageResource(R.drawable.arrow_start_icon)
-
-        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
-        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
-        stopButtonImageView.setImageResource(R.drawable.stop_unavailable_icon)
-    }
-
-
-
-    private fun updateTimerText() {
-        val minutes = secondsRemaining / 60
-        val seconds = secondsRemaining % 60
-        val timeString = String.format("%02d:%02d", minutes, seconds)
-        binding.timerTextView.text = timeString
-    }
-
-
-
     private fun handleButtonClick(
         textView: TextView,
         increment: Boolean,
@@ -333,5 +202,117 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+
+    @SuppressLint("RestrictedApi", "InflateParams")
+    fun endMatchSnackBarShow(){
+        val customView = layoutInflater.inflate(
+            R.layout.match_progress_end_snackbar,
+            null
+        )
+        val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+        val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackBar.view.layoutParams = params
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+
+        val button: Button = customView!!.findViewById(R.id.button)
+        button.setOnClickListener {
+            findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+        }
+        snackBarLayout.addView(customView, 0)
+        snackBar.show()
+    }
+
+
+    @SuppressLint("RestrictedApi", "InflateParams")
+    fun exitLiveSnackBarShow(){
+        val customView = layoutInflater.inflate(
+            R.layout.exit_live_snackbar_layout,
+            null
+        )
+        val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+        val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackBar.view.layoutParams = params
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+
+        snackBarLayout.addView(customView, 0)
+        snackBar.show()
+    }
+
+
+    private fun popupMenuShow(view: View){
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END, 0, R.style.PopupMenuStyle)
+        popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.matchRegister -> {
+                    findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
+                    true
+                }
+                R.id.exit -> {
+                    findNavController().navigate(R.id.action_matchProgressFragment_to_authorizationFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+
+
+    private fun setupSwitchToggle(
+        switch: Switch,
+        timeEditText: EditText,
+        plusButton: View,
+        minusButton: View
+    ) {
+        switch.setOnCheckedChangeListener { _, isChecked ->
+            timeEditText.isEnabled = !isChecked
+            val backgroundColor = if (isChecked) {
+                R.color.border2
+            } else {
+                R.color.transparent
+            }
+            plusButton.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
+            minusButton.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
+            timeEditText.setBackgroundColor(ContextCompat.getColor(requireContext(), backgroundColor))
+        }
+    }
+
+
+
+    private fun updateTimerStyleStop() = with(binding) {
+        startCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
+        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
+        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        startImageView.setImageResource(R.drawable.arrow_start_icon)
+
+        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
+        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        stopButtonImageView.setImageResource(R.drawable.stop_unavailable_icon)
+    }
+
+
+
+    private fun updateTimerStyleStart() = with(binding) {
+        startCardView.strokeColor = ContextCompat.getColor(requireContext(), R.color.unavailableText)
+        startTimeConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        startTimerTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.unavailableText))
+        startImageView.setImageResource(R.drawable.arrow_start_icon_unavailable)
+
+        stopConstraintLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), blue))
+        stopCardView.strokeColor = ContextCompat.getColor(requireContext(), blue)
+        stopTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+        stopButtonImageView.setImageResource(R.drawable.stop_available_icon)
     }
 }

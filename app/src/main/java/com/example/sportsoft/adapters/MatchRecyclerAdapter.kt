@@ -69,4 +69,16 @@ class MatchRecyclerAdapter(private val listener : Listener<MatchInfo>) :
         matchModels = list
         notifyDataSetChanged()
     }
+
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun sortByDate(ascending: Boolean) {
+        matchModels = if (ascending) {
+            matchModels.sortedBy { it.start_dt }
+        } else {
+            matchModels.sortedByDescending { it.start_dt }
+        }
+        notifyDataSetChanged()
+    }
 }

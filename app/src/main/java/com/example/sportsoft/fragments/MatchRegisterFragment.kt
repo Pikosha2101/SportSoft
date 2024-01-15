@@ -46,6 +46,9 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     private val PREFS_NAME = "TokenSharedPreferences"
     private val USER_TOKEN = "Token"
     private lateinit var sharedPreferences: SharedPreferences
+    private var isAscendingOrder = true
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,11 +80,8 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         val call = apiService.getMatches()
         serverRequest(call)
 
-
-
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-
 
         datePickerCardViewFrom.setOnClickListener {
             showDatePickerFromDialog()
@@ -92,25 +92,12 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         }
 
         dateSortConstraint.setOnClickListener {
-            Toast.makeText(requireContext(), "Сортировка по дате", Toast.LENGTH_SHORT).show()
+            isAscendingOrder = !isAscendingOrder
+            adapter.sortByDate(isAscendingOrder)
         }
 
-        menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
-            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-                when (item.itemId) {
-                    R.id.matchRegister -> {
-                        true
-                    }
-                    R.id.exit -> {
-                        findNavController().navigate(R.id.action_matchRegisterFragment_to_authorizationFragment)
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popupMenu.show()
+        menuImageButton.setOnClickListener {view ->
+            popupMenu(view)
         }
     }
 
@@ -150,6 +137,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
     }
 
 
+
     private fun createBundle(
         team1name: String,
         team2name: String,
@@ -171,6 +159,7 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
         bundle.putInt("isLive", isLive)
         return bundle
     }
+
 
 
     private fun showDatePickerFromDialog() = with(binding) {
@@ -293,5 +282,25 @@ class MatchRegisterFragment : Fragment(R.layout.match_register_fragment), Listen
                 Toast.makeText(requireContext(), R.string.TheRequestFailed, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+
+
+    private fun popupMenu(view: View){
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END, 0, R.style.PopupMenuStyle)
+        popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.matchRegister -> {
+                    true
+                }
+                R.id.exit -> {
+                    findNavController().navigate(R.id.action_matchRegisterFragment_to_authorizationFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 }
