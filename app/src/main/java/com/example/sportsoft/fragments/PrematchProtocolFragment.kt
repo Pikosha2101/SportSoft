@@ -3,7 +3,6 @@ package com.example.sportsoft.fragments
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.Gravity
@@ -13,14 +12,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsoft.adapters.TeamPlayersPrematchProtocolAdapter
 import com.example.sportsoft.models.PlayerModel
 import com.example.sportsoft.R
 import com.example.sportsoft.databinding.PrematchProtocolFragmentBinding
+import com.example.sportsoft.viewModels.PrematchProtocolViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 import kotlin.properties.Delegates
@@ -36,7 +38,7 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     private var secondTeamGoals: Int? = null
     private var matchActive by Delegates.notNull<Boolean>()
     private var matchIsLive by Delegates.notNull<Int>()
-
+    private lateinit var viewModel: PrematchProtocolViewModel
 
 
 
@@ -45,121 +47,16 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         savedInstanceState: Bundle?
     ): View {
         _binding = PrematchProtocolFragmentBinding.inflate(inflater, container, false)
-        firstTeamName = arguments?.getString("team1name")!!
-        secondTeamName = arguments?.getString("team2name")!!
-        firstTeamGoals = arguments?.getInt("team1goals")
-        secondTeamGoals = arguments?.getInt("team2goals")
-        matchActive = arguments?.getBoolean("active")!!
-        matchIsLive = arguments?.getInt("isLive")!!
+        viewModel = ViewModelProvider(this)[PrematchProtocolViewModel::class.java]
+        if (viewModel.firstTeamName.value == null) {
+            firstTeamName = arguments?.getString("team1name") ?: ""
+            secondTeamName = arguments?.getString("team2name") ?: ""
+            firstTeamGoals = arguments?.getInt("team1goals", 0)
+            secondTeamGoals = arguments?.getInt("team2goals", 0)
+            matchActive = arguments?.getBoolean("active", false)!!
+            matchIsLive = arguments?.getInt("isLive", 0)!!
 
-        return binding.root
-    }
-
-
-
-
-    @SuppressLint("RestrictedApi")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
-        super.onViewCreated(view, savedInstanceState)
-
-        firstTeamNameEditText.setText(firstTeamName)
-        secondTeamNameEditText.setText(secondTeamName)
-        firstTeamScoreTextView.setText(firstTeamGoals.toString())
-        secondTeamScoreTextView.setText(secondTeamGoals.toString())
-        firstTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, firstTeamName)
-        secondTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, secondTeamName)
-        firstTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, firstTeamName)
-        secondTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, secondTeamName)
-        refereesMatchConstraintLayout.setOnClickListener {
-            if (hiddenRefereesConstraintLayout.visibility == View.VISIBLE) {
-                TransitionManager.beginDelayedTransition(baseCardview, AutoTransition())
-                hiddenRefereesConstraintLayout.visibility = View.GONE
-                arrowDownImageView.setImageResource(R.drawable.arrow_down_icon)
-                separator3.visibility = View.VISIBLE
-            } else {
-                TransitionManager.beginDelayedTransition(baseCardview, AutoTransition())
-                hiddenRefereesConstraintLayout.visibility = View.VISIBLE
-                arrowDownImageView.setImageResource(R.drawable.arrow_up_icon)
-                separator3.visibility = View.GONE
-            }
-        }
-
-        compositionFirstTeamConstraintLayout.setOnClickListener {
-            if (hiddenCompositionFirstTeamConstraintLayout.visibility == View.VISIBLE){
-                TransitionManager.beginDelayedTransition(compositionFirstTeamCardView, AutoTransition())
-                hiddenCompositionFirstTeamConstraintLayout.visibility = View.GONE
-                arrowDownCompositionImageView.setImageResource(R.drawable.arrow_down_icon)
-                separator5.visibility = View.VISIBLE
-            } else {
-                TransitionManager.beginDelayedTransition(compositionFirstTeamCardView, AutoTransition())
-                hiddenCompositionFirstTeamConstraintLayout.visibility = View.VISIBLE
-                arrowDownCompositionImageView.setImageResource(R.drawable.arrow_up_icon)
-                separator5.visibility = View.GONE
-            }
-        }
-
-        compositionSecondTeamConstraintLayout.setOnClickListener {
-            if (hiddenCompositionSecondTeamConstraintLayout.visibility == View.VISIBLE){
-                TransitionManager.beginDelayedTransition(compositionSecondTeamCardView, AutoTransition())
-                hiddenCompositionSecondTeamConstraintLayout.visibility = View.GONE
-                arrowDownCompositionSecondTeamImageView.setImageResource(R.drawable.arrow_down_icon)
-                separator6.visibility = View.VISIBLE
-            } else {
-                TransitionManager.beginDelayedTransition(compositionSecondTeamCardView, AutoTransition())
-                hiddenCompositionSecondTeamConstraintLayout.visibility = View.VISIBLE
-                arrowDownCompositionSecondTeamImageView.setImageResource(R.drawable.arrow_up_icon)
-                separator6.visibility = View.GONE
-            }
-        }
-
-
-
-        firstTeamScoreCountPlusImageView.setOnClickListener {
-            val score = firstTeamScoreTextView.text.toString().toInt()
-            firstTeamScoreTextView.text = Editable.Factory.getInstance().newEditable((score + 1).toString())
-        }
-
-        firstTeamScoreCountMinusImageView.setOnClickListener {
-            val score = firstTeamScoreTextView.text.toString().toInt()
-            if (score != 0){
-                firstTeamScoreTextView.text = Editable.Factory.getInstance().newEditable((score - 1).toString())
-            }
-        }
-
-        secondTeamScoreCountPlusImageView.setOnClickListener {
-            val score = secondTeamScoreTextView.text.toString().toInt()
-            secondTeamScoreTextView.text = Editable.Factory.getInstance().newEditable((score + 1).toString())
-        }
-
-        secondTeamScoreCountMinusImageView.setOnClickListener {
-            val score = secondTeamScoreTextView.text.toString().toInt()
-            if (score != 0){
-                secondTeamScoreTextView.text = Editable.Factory.getInstance().newEditable((score - 1).toString())
-            }
-        }
-
-        menuImageButton.setOnClickListener {
-            val popupMenu = PopupMenu(requireContext(), it, Gravity.END, 0, R.style.PopupMenuStyle)
-            popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener { item: MenuItem ->
-                when (item.itemId) {
-                    R.id.matchRegister -> {
-                        findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
-                        true
-                    }
-                    R.id.exit -> {
-                        findNavController().navigate(R.id.action_prematchProtocolFragment_to_authorizationFragment)
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popupMenu.show()
-        }
-
-
-        saveAndStartButton.setOnClickListener {
-            val bundle = createBundle(
+            viewModel.updateValues(
                 firstTeamName,
                 secondTeamName,
                 firstTeamGoals,
@@ -167,24 +64,109 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
                 matchActive,
                 matchIsLive
             )
+        } else {
+            firstTeamName = viewModel.firstTeamName.value ?: ""
+            secondTeamName = viewModel.secondTeamName.value ?: ""
+            firstTeamGoals = viewModel.firstTeamGoals.value ?: 0
+            secondTeamGoals = viewModel.secondTeamGoals.value ?: 0
+            matchActive = viewModel.matchActive.value ?: false
+            matchIsLive = viewModel.matchIsLive.value ?: 0
+        }
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding){
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.firstTeamName.observe(viewLifecycleOwner) { value ->
+            firstTeamNameEditText.setText(value)
+        }
+
+        viewModel.secondTeamName.observe(viewLifecycleOwner){ value ->
+            secondTeamNameEditText.setText(value)
+        }
+
+        viewModel.firstTeamGoals.observe(viewLifecycleOwner){ value ->
+            firstTeamScoreTextView.setText(value.toString())
+        }
+
+        viewModel.secondTeamGoals.observe(viewLifecycleOwner){ value ->
+            secondTeamScoreTextView.setText(value.toString())
+        }
+
+        firstTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, firstTeamName)
+        secondTeamPlayerTextView.text = resources.getString(R.string.PlayerMatch, secondTeamName)
+        firstTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, firstTeamName)
+        secondTeamCompositionTextView.text = resources.getString(R.string.TeamСomposition, secondTeamName)
+
+        refereesMatchConstraintLayout.setOnClickListener {
+            toggleVisibility(hiddenRefereesConstraintLayout, arrowDownImageView, separator3)
+        }
+
+        compositionFirstTeamConstraintLayout.setOnClickListener {
+            toggleVisibility(hiddenCompositionFirstTeamConstraintLayout, arrowDownCompositionImageView, separator5)
+        }
+
+        compositionSecondTeamConstraintLayout.setOnClickListener {
+            toggleVisibility(hiddenCompositionSecondTeamConstraintLayout, arrowDownCompositionSecondTeamImageView, separator6)
+        }
+
+        firstTeamScoreCountPlusImageView.setOnClickListener {
+            val score = firstTeamScoreTextView.text.toString().toInt()
+            firstTeamScoreTextView.setText(viewModel.changeScore(score, true).toString())
+            viewModel.updateFirstTeamScoreCountPlus(score + 1)
+        }
+
+        firstTeamScoreCountMinusImageView.setOnClickListener {
+            val score = firstTeamScoreTextView.text.toString().toInt()
+            firstTeamScoreTextView.setText(viewModel.changeScore(score, false).toString())
+            if (score != 0){
+                viewModel.updateFirstTeamScoreCountPlus(score - 1)
+            }
+        }
+
+        secondTeamScoreCountPlusImageView.setOnClickListener {
+            val score = secondTeamScoreTextView.text.toString().toInt()
+            secondTeamScoreTextView.setText(viewModel.changeScore(score, true).toString())
+            viewModel.updateSecondTeamScoreCountPlus(score + 1)
+        }
+
+        secondTeamScoreCountMinusImageView.setOnClickListener {
+            val score = secondTeamScoreTextView.text.toString().toInt()
+            secondTeamScoreTextView.setText(viewModel.changeScore(score, false).toString())
+            if (score != 0){
+                viewModel.updateSecondTeamScoreCountPlus(score - 1)
+            }
+        }
+
+        menuImageButton.setOnClickListener { view ->
+            showPopupMenu(view)
+        }
+
+        saveAndStartButton.setOnClickListener {
+            viewModel.updateValues(
+                firstTeamName,
+                secondTeamName,
+                firstTeamGoals,
+                secondTeamGoals,
+                matchActive,
+                matchIsLive
+            )
+            val bundle = createBundle(
+                viewModel.firstTeamName.value ?: "",
+                viewModel.secondTeamName.value ?: "",
+                viewModel.firstTeamGoals.value,
+                viewModel.secondTeamGoals.value,
+                viewModel.matchActive.value ?: false,
+                viewModel.matchIsLive.value ?: 0
+            )
             findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchProgressFragment, bundle)
         }
 
         saveAllButton.setOnClickListener {
-            //findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
-            val customView = layoutInflater.inflate(
-                R.layout.prematch_protocol_snackbar_layout,
-                null
-            )
-            val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
-            snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-
-            val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
-            params.gravity = Gravity.TOP
-            snackBar.view.layoutParams = params
-            val snackBarLayout = snackBar.view as SnackbarLayout
-            snackBarLayout.addView(customView, 0)
-            snackBar.show()
+            showSnackBar()
         }
 
         firstTeamAdapter.setList(
@@ -290,7 +272,6 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
                 )
             )
         )
-
 
         secondTeamAdapter.setList(
             listOf(
@@ -405,7 +386,6 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         secondTeamCompositionRecyclerView.layoutManager= LinearLayoutManager(requireContext())
         secondTeamCompositionRecyclerView.adapter = secondTeamAdapter
 
-
         val firstNameNamesList: List<String> = firstTeamAdapter.getList().map { player -> player.name }
         val secondNameNamesList: List<String> = secondTeamAdapter.getList().map { player -> player.name }
 
@@ -455,5 +435,61 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+
+    @SuppressLint("RestrictedApi", "InflateParams")
+    fun showSnackBar(){
+        val customView = layoutInflater.inflate(
+            R.layout.prematch_protocol_snackbar_layout,
+            null
+        )
+        val snackBar = Snackbar.make(binding.root, "", Snackbar.LENGTH_SHORT)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+
+        val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackBar.view.layoutParams = params
+        val snackBarLayout = snackBar.view as SnackbarLayout
+        snackBarLayout.addView(customView, 0)
+        snackBar.show()
+    }
+
+
+
+    private fun showPopupMenu(view: View){
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END, 0, R.style.PopupMenuStyle)
+        popupMenu.menuInflater.inflate(R.menu.menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.matchRegister -> {
+                    findNavController().navigate(R.id.action_prematchProtocolFragment_to_matchRegisterFragment)
+                    true
+                }
+                R.id.exit -> {
+                    findNavController().navigate(R.id.action_prematchProtocolFragment_to_authorizationFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+
+
+    private fun toggleVisibility(hiddenLayout: View, arrowImageView: ImageView, separatorView: View) = with(binding) {
+        if (hiddenLayout.visibility == View.VISIBLE) {
+            TransitionManager.beginDelayedTransition(baseCardview, AutoTransition())
+            hiddenLayout.visibility = View.GONE
+            arrowImageView.setImageResource(R.drawable.arrow_down_icon)
+            separatorView.visibility = View.VISIBLE
+        } else {
+            TransitionManager.beginDelayedTransition(baseCardview, AutoTransition())
+            hiddenLayout.visibility = View.VISIBLE
+            arrowImageView.setImageResource(R.drawable.arrow_up_icon)
+            separatorView.visibility = View.GONE
+        }
     }
 }
