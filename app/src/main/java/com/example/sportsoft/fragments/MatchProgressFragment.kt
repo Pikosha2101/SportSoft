@@ -34,14 +34,12 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
     private lateinit var viewModel: MatchProgressViewModel
     private var isTimerRunning = false
-    private var secondsRemaining: Long = 0
     private lateinit var firstTeamName: String
     private lateinit var secondTeamName: String
     private var firstTeamGoals: Int? = null
     private var secondTeamGoals: Int? = null
     private var matchActive by Delegates.notNull<Boolean>()
     private var matchIsLive by Delegates.notNull<Int>()
-    private lateinit var countUpTimer: CountUpTimer
     private var eventsList = listOf("Гол", "Желтая карточка", "Красная карточка")
 
 
