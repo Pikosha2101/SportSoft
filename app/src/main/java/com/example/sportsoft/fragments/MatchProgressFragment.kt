@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.sportsoft.CountUpTimer
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
