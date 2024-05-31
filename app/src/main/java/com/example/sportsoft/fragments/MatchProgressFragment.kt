@@ -3,6 +3,7 @@ package com.example.sportsoft.fragments
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.sportsoft.NotificationSnackBar
 import com.example.sportsoft.R
 import com.example.sportsoft.R.color.blue
 import com.example.sportsoft.databinding.MatchProgressFragmentBinding
@@ -88,12 +90,17 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
 
         finishCardView.setOnClickListener {
             viewModel.stopTimer()
-            endMatchSnackBarShow()
+            //endMatchSnackBarShow()
+            NotificationSnackBar()
+                .showNotification(layoutInflater, R.layout.match_progress_end_snackbar, requireView())
+            updateTimerStyleStop()
         }
 
         leaveCardView.setOnClickListener {
             if(isTimerRunning) {
-                exitLiveSnackBarShow()
+                //exitLiveSnackBarShow()
+                NotificationSnackBar()
+                    .showNotification(layoutInflater, R.layout.exit_live_snackbar_layout, requireView())
             } else {
                 findNavController().navigate(R.id.action_matchProgressFragment_to_matchRegisterFragment)
             }
@@ -139,9 +146,24 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             handleButtonClick(eventTimeEditText, increment = false, 0)
         }
 
-        setupSwitchToggle(redCardSwitch, eventTimeRedCardEditText, eventTimeRedCardPlusImageButton, eventTimeRedCardMinusImageButton)
-        setupSwitchToggle(goalSwitch, eventTimeGoalEditText, eventTimeGoalPlusImageButton, eventTimeGoalMinusImageButton)
-        setupSwitchToggle(yellowCardSwitch, eventTimeEditText, eventTimePlusImageButton, eventTimeMinusImageButton)
+        setupSwitchToggle(
+            redCardSwitch,
+            eventTimeRedCardEditText,
+            eventTimeRedCardPlusImageButton,
+            eventTimeRedCardMinusImageButton
+        )
+        setupSwitchToggle(
+            goalSwitch,
+            eventTimeGoalEditText,
+            eventTimeGoalPlusImageButton,
+            eventTimeGoalMinusImageButton
+        )
+        setupSwitchToggle(
+            yellowCardSwitch,
+            eventTimeEditText,
+            eventTimePlusImageButton,
+            eventTimeMinusImageButton
+        )
 
         menuImageButton.setOnClickListener { view ->
             popupMenuShow(view)
@@ -174,7 +196,7 @@ class MatchProgressFragment : Fragment(R.layout.match_progress_fragment) {
             }
 
             override fun onNothingSelected(parentView: AdapterView<*>) {
-
+                Log.i("EventSpinnerLog", "NothingSelected")
             }
         }
     }

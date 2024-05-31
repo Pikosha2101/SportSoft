@@ -13,5 +13,4 @@ class MatchInterceptor(private val accessToken: String) : Interceptor{
             .build()
         return chain.proceed(newRequest)
     }
-
 }

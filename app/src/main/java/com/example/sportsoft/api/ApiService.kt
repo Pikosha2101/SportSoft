@@ -14,7 +14,9 @@ interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("api/match")
-    fun getMatches(@Query("MatchSearch[sinceDt]") test : String?, @Query("MatchSearch[toDt]") test1 : String?): Call<MatchResponse>
+    fun getMatches(
+        @Query("MatchSearch[sinceDt]") test : String?, @Query("MatchSearch[toDt]") test1 : String?)
+    : Call<MatchResponse>
 
 
     @Headers("Content-Type: application/json")

@@ -9,7 +9,7 @@ import com.example.sportsoft.R
 import com.example.sportsoft.databinding.PlayerRecyclerItemBinding
 import com.squareup.picasso.Picasso
 
-class TeamPlayersPrematchProtocolAdapter() :
+class TeamPlayersPrematchProtocolAdapter :
     RecyclerView.Adapter<TeamPlayersPrematchProtocolAdapter.Holder>(){
 
     private var playerModels: List<PlayerModel> = listOf()

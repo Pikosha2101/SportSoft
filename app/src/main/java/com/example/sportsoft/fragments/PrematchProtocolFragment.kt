@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsoft.NotificationSnackBar
 import com.example.sportsoft.adapters.TeamPlayersPrematchProtocolAdapter
 import com.example.sportsoft.models.PlayerModel
 import com.example.sportsoft.R
@@ -166,7 +167,8 @@ class PrematchProtocolFragment : Fragment(R.layout.prematch_protocol_fragment) {
         }
 
         saveAllButton.setOnClickListener {
-            showSnackBar()
+            //showSnackBar()
+            NotificationSnackBar().showNotification(layoutInflater, R.layout.prematch_protocol_snackbar_layout, requireView())
         }
 
         firstTeamAdapter.setList(
